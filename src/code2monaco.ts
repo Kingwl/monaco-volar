@@ -478,8 +478,8 @@ export function asFoldingRange(
   item: vscode.FoldingRange
 ): languages.FoldingRange {
   return {
-    start: item.startLine,
-    end: item.endLine,
+    start: item.startLine + 1,
+    end: item.endLine + 1,
     kind: {
       value: item.kind ?? "",
     },
