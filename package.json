@@ -60,6 +60,7 @@
     "build:worker": "vite build -c ./scripts/vite.worker.config.ts",
     "build:dts": "tsc -p ./tsconfig.build.json",
     "build": "pnpm build:lib && pnpm build:worker && pnpm build:dts",
+    "build:demo": "vite build -c ./vite.config.ts",
     "dev": "vite dev",
     "format:check": "prettier -c ./{src,tests,scripts}/*.ts ./vite.config.ts",
     "format:fix": "pnpm format:check --write"

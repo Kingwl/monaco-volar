@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import * as path from 'path';
 
 export default defineConfig({
   optimizeDeps: {
@@ -15,18 +16,6 @@ export default defineConfig({
   },
   build: {
     minify: false,
-    lib: {
-      entry: "./src/index.ts",
-      formats: ["es"],
-      name: "index.js",
-    },
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        format: "es",
-        entryFileNames: "[name].js",
-        chunkFileNames: "[name].js",
-      },
-    },
+    outDir: path.resolve(__dirname, './out')
   },
 });

@@ -4,27 +4,33 @@ import { loadGrammars, loadTheme, prepareVirtualFiles } from "../src/index";
 import { getOrCreateModel } from "../src/utils";
 import data from "./Test.vue?raw";
 
-loadMonacoEnv();
-loadOnigasm();
-const theme = await loadTheme();
+const afterReady = (theme: string) => {
+  const element = document.getElementById("app")!;
 
-const element = document.getElementById("app")!;
+  prepareVirtualFiles();
 
-prepareVirtualFiles();
+  const model = getOrCreateModel(Uri.parse("file:///demo.vue"), "vue", data);
 
-const model = getOrCreateModel(Uri.parse("file:///demo.vue"), "vue", data);
+  const editorInstance = editor.create(element, {
+    theme,
+    model,
+    automaticLayout: true,
+    scrollBeyondLastLine: false,
+    minimap: {
+      enabled: false,
+    },
+    inlineSuggest: {
+      enabled: false,
+    },
+  });
 
-const editorInstance = editor.create(element, {
-  theme,
-  model,
-  automaticLayout: true,
-  scrollBeyondLastLine: false,
-  minimap: {
-    enabled: false,
-  },
-  inlineSuggest: {
-    enabled: false,
-  },
-});
+  loadGrammars(editorInstance);
+}
 
-loadGrammars(editorInstance);
+Promise.all([
+  loadMonacoEnv(),
+  loadOnigasm(),
+  loadTheme(),
+]).then(([,,theme]) => {
+  afterReady(theme)
+})
