@@ -1,5 +1,5 @@
 {
-  "name": "monaco-vue",
+  "name": "monaco-volar",
   "version": "0.0.1",
   "description": "Vue support for monaco",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
   "packageManager": "pnpm@7.2.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kingwl/monaco-vue.git"
+    "url": "git+https://github.com/Kingwl/monaco-volar.git"
   },
   "keywords": [
     "monaco",
@@ -25,9 +25,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Kingwl/monaco-vue/issues"
+    "url": "https://github.com/Kingwl/monaco-volar/issues"
   },
-  "homepage": "https://github.com/Kingwl/monaco-vue#readme",
+  "homepage": "https://github.com/Kingwl/monaco-volar#readme",
   "devDependencies": {
     "@types/node": "^17.0.42",
     "@volar/vue-language-service": "0.37.3",
