@@ -29,37 +29,37 @@
   },
   "homepage": "https://github.com/Kingwl/monaco-vue#readme",
   "devDependencies": {
+    "@types/node": "^17.0.42",
+    "@volar/vue-language-service": "0.37.3",
     "@vue/reactivity": "^3.2.37",
     "@vue/runtime-core": "^3.2.37",
     "@vue/runtime-dom": "^3.2.37",
     "@vue/shared": "^3.2.37",
-    "onigasm": "^2.2.5",
-    "path-browserify": "^1.0.1",
-    "vite": "^3.0.0-alpha.11",
-    "vue": "^3.2.37",
-    "@volar/vue-language-service": "0.37.3",
+    "esbuild": "^0.14.43",
+    "monaco-editor-core": "^0.33.0",
     "monaco-editor-textmate": "^3.0.0",
     "monaco-textmate": "^3.0.1",
+    "onigasm": "^2.2.5",
+    "path-browserify": "^1.0.1",
     "prettier": "^2.6.2",
     "typescript": "^4.7.3",
+    "vite": "^3.0.0-alpha.11",
     "vscode-languageserver-protocol": "^3.17.1",
-    "monaco-editor-core": "^0.33.0"
+    "vue": "^3.2.37"
   },
   "peerDependencies": {
-    "monaco-editor-core": "^0.33.0",
-    "onigasm": "^2.2.5"
+    "monaco-editor-core": "^0.33.0"
   },
   "dependencies": {
-    "monaco-editor-core": "^0.33.0",
-    "onigasm": "^2.2.5"
+    "monaco-editor-core": "^0.33.0"
   },
   "scripts": {
-    "build:lib": "vite build -c ./vite.lib.config.ts",
-    "build:worker": "vite build -c ./vite.worker.config.ts",
+    "build:lib": "vite build -c ./scripts/vite.lib.config.ts",
+    "build:worker": "vite build -c ./scripts/vite.worker.config.ts",
     "build:dts": "tsc -p ./tsconfig.build.json",
     "build": "pnpm build:lib && pnpm build:worker && pnpm build:dts",
     "dev": "vite dev",
-    "format:check": "prettier -c ./{src,tests}/*.ts ./*.vite.config.ts",
+    "format:check": "prettier -c ./{src,tests,scripts}/*.ts ./vite.config.ts",
     "format:fix": "pnpm format:check --write"
   },
   "files": [

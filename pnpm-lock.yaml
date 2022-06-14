@@ -1,11 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/node': ^17.0.42
   '@volar/vue-language-service': 0.37.3
   '@vue/reactivity': ^3.2.37
   '@vue/runtime-core': ^3.2.37
   '@vue/runtime-dom': ^3.2.37
   '@vue/shared': ^3.2.37
+  esbuild: ^0.14.43
   monaco-editor-core: ^0.33.0
   monaco-editor-textmate: ^3.0.0
   monaco-textmate: ^3.0.1
@@ -22,11 +24,13 @@ dependencies:
   onigasm: 2.2.5
 
 devDependencies:
+  '@types/node': 17.0.42
   '@volar/vue-language-service': 0.37.3
   '@vue/reactivity': 3.2.37
   '@vue/runtime-core': 3.2.37
   '@vue/runtime-dom': 3.2.37
   '@vue/shared': 3.2.37
+  esbuild: 0.14.43
   monaco-editor-textmate: 3.0.0_monaco-textmate@3.0.1
   monaco-textmate: 3.0.1_onigasm@2.2.5
   path-browserify: 1.0.1
@@ -86,6 +90,10 @@ packages:
 
   /@johnsoncodehk/pug-beautify/0.2.2:
     resolution: {integrity: sha512-qqNS/YD0Nck5wtQLCPHAfGVgWbbGafxSPjNh0ekYPFSNNqnDH2kamnduzYly8IiADmeVx/MfAE1njMEjVeHTMA==}
+    dev: true
+
+  /@types/node/17.0.42:
+    resolution: {integrity: sha512-Q5BPGyGKcvQgAMbsr7qEGN/kIPN6zZecYYABeTDBizOsau+2NMdSVTar9UQw21A2+JyA2KRNDYaYrPB0Rpk2oQ==}
     dev: true
 
   /@volar/code-gen/0.37.3:
