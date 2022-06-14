@@ -5,16 +5,6 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "packageManager": "pnpm@7.2.1",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./vue.worker": {
-      "import": "./dist/vue.worker.js",
-      "types": "./dist/vue.worker.d.ts"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kingwl/monaco-vue.git"
@@ -35,7 +25,7 @@
     "@vue/shared": "^3.2.37",
     "onigasm": "^2.2.5",
     "path-browserify": "^1.0.1",
-    "vite": "^2.9.12",
+    "vite": "^3.0.0-alpha.11",
     "vue": "^3.2.37",
     "@volar/vue-language-service": "0.37.3",
     "monaco-editor-textmate": "^3.0.0",
@@ -46,10 +36,12 @@
     "monaco-editor-core": "^0.33.0"
   },
   "peerDependencies": {
-    "monaco-editor-core": "^0.33.0"
+    "monaco-editor-core": "^0.33.0",
+    "onigasm": "^2.2.5"
   },
   "dependencies": {
-    "monaco-editor-core": "^0.33.0"
+    "monaco-editor-core": "^0.33.0",
+    "onigasm": "^2.2.5"
   },
   "scripts": {
     "build:bundle": "vite build",

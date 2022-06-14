@@ -5,10 +5,8 @@
         "module": "esnext",
         "target": "esnext",
         "declaration": true,
-        "isolatedModules": true,
-        "esModuleInterop": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true
+        "esModuleInterop": true
     }
 }

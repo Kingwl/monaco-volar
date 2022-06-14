@@ -13,12 +13,13 @@ specifiers:
   path-browserify: ^1.0.1
   prettier: ^2.6.2
   typescript: ^4.7.3
-  vite: ^2.9.12
+  vite: ^3.0.0-alpha.11
   vscode-languageserver-protocol: ^3.17.1
   vue: ^3.2.37
 
 dependencies:
   monaco-editor-core: 0.33.0
+  onigasm: 2.2.5
 
 devDependencies:
   '@volar/vue-language-service': 0.37.3
@@ -28,11 +29,10 @@ devDependencies:
   '@vue/shared': 3.2.37
   monaco-editor-textmate: 3.0.0_monaco-textmate@3.0.1
   monaco-textmate: 3.0.1_onigasm@2.2.5
-  onigasm: 2.2.5
   path-browserify: 1.0.1
   prettier: 2.6.2
   typescript: 4.7.3
-  vite: 2.9.12
+  vite: 3.0.0-alpha.11
   vscode-languageserver-protocol: 3.17.1
   vue: 3.2.37
 
@@ -696,7 +696,6 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
       yallist: 3.1.1
-    dev: true
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -748,7 +747,6 @@ packages:
     resolution: {integrity: sha1-zE0qeaD6C2TK7B9MfqNnWFpnaJI=}
     dependencies:
       lru-cache: 5.1.1
-    dev: true
 
   /path-browserify/1.0.1:
     resolution: {integrity: sha1-2YRUqcN1PVeQhg8W9ohnueRr4f0=}
@@ -938,20 +936,23 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /vite/2.9.12:
-    resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}
-    engines: {node: '>=12.2.0'}
+  /vite/3.0.0-alpha.11:
+    resolution: {integrity: sha512-hi68rWGWqaReMmkDjQMrFdJhozEKcheFkUhQ3Z8+zDMPw5OSRoy20U9J75qnfEEG8owqWd3CPNYSv7LqduO/jA==}
+    engines: {node: '>=14.6.0'}
     hasBin: true
     peerDependencies:
       less: '*'
       sass: '*'
       stylus: '*'
+      terser: ^5.4.0
     peerDependenciesMeta:
       less:
         optional: true
       sass:
         optional: true
       stylus:
+        optional: true
+      terser:
         optional: true
     dependencies:
       esbuild: 0.14.43
@@ -1049,7 +1050,6 @@ packages:
 
   /yallist/3.1.1:
     resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=}
-    dev: true
 
   /yallist/4.0.0:
     resolution: {integrity: sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=}

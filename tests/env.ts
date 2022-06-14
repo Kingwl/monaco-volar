@@ -1,7 +1,11 @@
 import editorWorker from "monaco-editor-core/esm/vs/editor/editor.worker?worker";
 import vueWorker from "../src/vue.worker?worker";
-import { loadWASM } from "onigasm";
-import onigasm from "onigasm/lib/onigasm.wasm?url";
+import * as onigasm from "onigasm";
+import onigasmWasm from "onigasm/lib/onigasm.wasm?url";
+
+export function loadOnigasm() {
+  return onigasm.loadWASM(onigasmWasm);
+}
 
 export function loadMonacoEnv() {
   (self as any).MonacoEnvironment = {
@@ -14,6 +18,3 @@ export function loadMonacoEnv() {
   };
 }
 
-export function loadOnigasm() {
-  return loadWASM(onigasm);
-}
