@@ -1,0 +1,66 @@
+{
+  "name": "monaco-vue",
+  "version": "0.0.1",
+  "description": "Vue support for monaco",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "packageManager": "pnpm@7.2.1",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./vue.worker": {
+      "import": "./dist/vue.worker.js",
+      "types": "./dist/vue.worker.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kingwl/monaco-vue.git"
+  },
+  "keywords": [
+    "monaco",
+    "vue"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kingwl/monaco-vue/issues"
+  },
+  "homepage": "https://github.com/Kingwl/monaco-vue#readme",
+  "devDependencies": {
+    "@vue/reactivity": "^3.2.37",
+    "@vue/runtime-core": "^3.2.37",
+    "@vue/runtime-dom": "^3.2.37",
+    "@vue/shared": "^3.2.37",
+    "onigasm": "^2.2.5",
+    "path-browserify": "^1.0.1",
+    "vite": "^2.9.12",
+    "vue": "^3.2.37",
+    "@volar/vue-language-service": "0.37.3",
+    "monaco-editor-textmate": "^3.0.0",
+    "monaco-textmate": "^3.0.1",
+    "prettier": "^2.6.2",
+    "typescript": "^4.7.3",
+    "vscode-languageserver-protocol": "^3.17.1",
+    "monaco-editor-core": "^0.33.0"
+  },
+  "peerDependencies": {
+    "monaco-editor-core": "^0.33.0"
+  },
+  "dependencies": {
+    "monaco-editor-core": "^0.33.0"
+  },
+  "scripts": {
+    "build:bundle": "vite build",
+    "build:dts": "tsc -p ./tsconfig.build.json",
+    "build": "pnpm build:bundle && pnpm build:dts",
+    "dev": "vite dev",
+    "format:check": "prettier -c ./{src,tests}/*.ts ./vite.config.ts",
+    "format:fix": "pnpm format:check --write"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
