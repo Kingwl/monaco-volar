@@ -3,6 +3,7 @@ import * as path from "path";
 
 export default defineConfig({
   base: "",
+  publicDir: "",
   optimizeDeps: {
     include: [
       "path-browserify",
