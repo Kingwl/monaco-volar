@@ -2,12 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
     optimizeDeps: {
-        include: ["path-browserify", "@volar/vue-language-service", "monaco-editor-core"],
-    },
-    resolve: {
-        alias: {
-            path: "path-browserify"
-        }
+        exclude: ["monaco-editor-core", "onigasm"]
     },
     build: {
         minify: false,
@@ -16,6 +11,7 @@ export default defineConfig({
             formats: ['es'],
             name: 'index.js'
         },
+        outDir: "./dist/lib",
         sourcemap: true,
         rollupOptions: {
             output: {

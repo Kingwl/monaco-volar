@@ -4,6 +4,16 @@
   "description": "Vue support for monaco",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/lib/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./vue.worker": {
+      "import": "./dist/worker/vue.worker.js",
+      "types": "./dist/vue.worker.d.ts"
+    }
+  },
   "packageManager": "pnpm@7.2.1",
   "repository": {
     "type": "git",
@@ -44,11 +54,12 @@
     "onigasm": "^2.2.5"
   },
   "scripts": {
-    "build:bundle": "vite build",
+    "build:lib": "vite build -c ./vite.lib.config.ts",
+    "build:worker": "vite build -c ./vite.worker.config.ts",
     "build:dts": "tsc -p ./tsconfig.build.json",
-    "build": "pnpm build:bundle && pnpm build:dts",
+    "build": "pnpm build:lib && pnpm build:worker && pnpm build:dts",
     "dev": "vite dev",
-    "format:check": "prettier -c ./{src,tests}/*.ts ./vite.config.ts",
+    "format:check": "prettier -c ./{src,tests}/*.ts ./*.vite.config.ts",
     "format:fix": "pnpm format:check --write"
   },
   "files": [
