@@ -25,12 +25,10 @@ const afterReady = (theme: string) => {
   });
 
   loadGrammars(editorInstance);
-}
+};
 
-Promise.all([
-  loadMonacoEnv(),
-  loadOnigasm(),
-  loadTheme(),
-]).then(([,,theme]) => {
-  afterReady(theme)
-})
+Promise.all([loadMonacoEnv(), loadOnigasm(), loadTheme()]).then(
+  ([, , theme]) => {
+    afterReady(theme);
+  }
+);

@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import * as path from 'path';
+import * as path from "path";
 
 export default defineConfig({
   optimizeDeps: {
@@ -16,6 +16,6 @@ export default defineConfig({
   },
   build: {
     minify: false,
-    outDir: path.resolve(__dirname, './out')
+    outDir: path.resolve(__dirname, "./out"),
   },
 });
