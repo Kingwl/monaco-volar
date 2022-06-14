@@ -11,11 +11,6 @@ export const loadGrammars = async (editor: editor.IStandaloneCodeEditor) => {
   return grammars.loadGrammars(editor);
 };
 
-export const loadWasm = async (data: string | ArrayBuffer) => {
-  const grammars = await import("./grammars");
-  return grammars.loadWasm(data);
-};
-
 export const prepareVirtualFiles = async () => {
   const prepare = await import("./prepare");
   return prepare.prepareVirtualFiles();

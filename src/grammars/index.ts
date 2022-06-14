@@ -1,7 +1,6 @@
 import * as monaco from 'monaco-editor-core';
 import { wireTmGrammars } from 'monaco-editor-textmate';
 import { Registry, type IGrammarDefinition } from 'monaco-textmate';
-import * as onigasm from 'onigasm'
 
 async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> {
   switch (scopeName) {
@@ -60,10 +59,6 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
         },
       };
   }
-}
-
-export function loadWasm(data: string | ArrayBuffer) {
-  return onigasm.loadWASM(data)
 }
 
 export async function loadGrammars(editor: monaco.editor.IStandaloneCodeEditor) {

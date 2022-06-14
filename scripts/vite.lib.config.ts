@@ -1,12 +1,13 @@
 import { defineConfig } from "vite";
 import * as path from "path";
 import { externalCjsToEsmPlugin } from "./plugin";
+import { externals } from "./config";
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ["monaco-editor-core", "path"],
+    exclude: externals,
     esbuildOptions: {
-      plugins: [externalCjsToEsmPlugin(["monaco-editor-core", "path"])],
+      plugins: [externalCjsToEsmPlugin(externals)],
     },
   },
   build: {
@@ -24,7 +25,7 @@ export default defineConfig({
         entryFileNames: "[name].js",
         chunkFileNames: "[name].js",
       },
-      external: ["monaco-editor-core", "path"],
+      external: externals,
     },
   },
 });
