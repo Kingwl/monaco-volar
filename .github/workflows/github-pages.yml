@@ -1,4 +1,4 @@
-name: Github pages
+name: Pages
 
 on:
   push:
@@ -8,21 +8,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16
+    - uses: actions/checkout@v3
+    - name: Use Node.js 16
       uses: actions/setup-node@v3
       with:
         node-version: 16
-      - run: npm install -g pnpm@7.2.1
-      - run: pnpm i
-      - run: pnpm format:check
-      - run: pnpm build
-      - run: pnpm build:demo
-      - name: Release pages
-        if: github.ref == 'refs/heads/main'
-        uses: crazy-max/ghaction-github-pages@v3.0.0
-        with:
-          build_dir: ./out
-          commit_message: Update pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: npm install -g pnpm@7.2.1
+    - run: pnpm i
+    - run: pnpm format:check
+    - run: pnpm build
+    - run: pnpm build:demo
+    - name: Release pages
+      if: github.ref == 'refs/heads/main'
+      uses: crazy-max/ghaction-github-pages@v3.0.0
+      with:
+        build_dir: ./out
+        commit_message: Update pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
