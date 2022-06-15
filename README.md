@@ -4,7 +4,7 @@
 
 `Monaco-volar` has external dependency Onigasm (to highlight code).
 
-```shell
+```console
 pnpm add monaco-volar monaco-editor-core onigasm
 
 # or
