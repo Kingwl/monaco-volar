@@ -2,7 +2,9 @@
 
 ## Install
 
-```bash
+`Monaco-volar` has external dependency Onigasm (to highlight code).
+
+```shell
 pnpm add monaco-volar monaco-editor-core onigasm
 
 # or
@@ -47,7 +49,6 @@ Now we can apply grammars into monaco editor instance.
 
 ```ts
 import { editor } from "monaco-editor-core";
-
 import { loadGrammars, loadTheme } from "monaco-volar";
 
 const theme = loadTheme()
