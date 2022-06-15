@@ -504,6 +504,30 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       return code2monaco.asHover(codeResult);
     }
   }
+
+  private _toMarkers(errors: vscode.Diagnostic[]) {
+    return errors.map(error => {
+        const marker = code2monaco.asMarkerData(error);
+        this._diagnostics.set(marker, error);
+        return marker;
+    });
+  }
+  
+  async doValidation (model: editor.ITextModel) {
+    const worker = await this._worker(model.uri);
+    const diagnostics = await worker.doValidation(model.uri.toString(), unfinishResult => {
+        editor.setModelMarkers(
+            model,
+            'vue',
+            this._toMarkers(unfinishResult),
+        );
+    });
+    editor.setModelMarkers(
+        model,
+        'vue',
+        this._toMarkers(diagnostics),
+    );
+  }
 }
 
 export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
@@ -519,12 +543,12 @@ export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
     return client.getLanguageServiceWorker(...uris);
   };
 
+  const adapter = new WorkerAdapter(worker);
+
   function registerProviders(): void {
     const { languageId } = defaults;
 
     disposeAll(providers);
-
-    const adapter = new WorkerAdapter(worker);
 
     providers.push(
       languages.registerHoverProvider(languageId, adapter),
