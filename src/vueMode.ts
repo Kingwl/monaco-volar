@@ -168,6 +168,22 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     }
   }
 
+  async resolveCodeLens(
+    model: editor.ITextModel,
+    moncaoResult: languages.CodeLens
+  ) {
+    let codeResult = this._codeLens.get(moncaoResult);
+    if (codeResult) {
+      const worker = await this._worker(model.uri);
+      codeResult = await worker.doCodeLensResolve(codeResult);
+      if (codeResult) {
+        moncaoResult = code2monaco.asCodeLens(codeResult);
+        this._codeLens.set(moncaoResult, codeResult);
+      }
+    }
+    return moncaoResult;
+  }
+
   async provideCodeActions(
     model: editor.ITextModel,
     range: Range,
@@ -201,6 +217,19 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         dispose: () => {},
       };
     }
+  }
+
+  async resolveCodeAction(moncaoResult: languages.CodeAction) {
+    let codeResult = this._codeActions.get(moncaoResult);
+    if (codeResult) {
+      const worker = await this._worker();
+      codeResult = await worker.doCodeActionResolve(codeResult);
+      if (codeResult) {
+        moncaoResult = code2monaco.asCodeAction(codeResult);
+        this._codeActions.set(moncaoResult, codeResult);
+      }
+    }
+    return moncaoResult;
   }
 
   autoFormatTriggerCharacters = ["}", ";", "\n"];
@@ -292,6 +321,20 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       );
     }
     return monacoResult;
+  }
+
+  async resolveCompletionItem(
+    monacoItem: languages.CompletionItem,
+    token: CancellationToken
+  ) {
+    let codeItem = this._completionItems.get(monacoItem);
+    if (codeItem) {
+      const worker = await this._worker();
+      codeItem = await worker.doCompletionResolve(codeItem);
+      monacoItem = code2monaco.asCompletionItem(codeItem);
+      this._completionItems.set(monacoItem, codeItem);
+    }
+    return monacoItem;
   }
 
   async provideDocumentColors(
