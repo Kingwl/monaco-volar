@@ -8,5 +8,6 @@
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "esModuleInterop": true
-    }
+    },
+    "exclude": ["out", "dist"]
 }
