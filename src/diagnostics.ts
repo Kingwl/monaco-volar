@@ -113,14 +113,14 @@ export const createDiagnosticsAdapter = (
     })
   );
 
-  const recomputeDiagostics = () => {
+  const recompute = () => {
     for (const model of editor.getModels()) {
       onModelRemoved(model);
       onModelAdd(<IInternalEditorModel>model);
     }
   };
-  disposables.push(_defaults.onDidChange(recomputeDiagostics));
-  disposables.push(_defaults.onExtraLibChange(recomputeDiagostics));
+  disposables.push(_defaults.onDidChange(recompute));
+  disposables.push(_defaults.onExtraLibChange(recompute));
 
   editor
     .getModels()
