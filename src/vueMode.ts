@@ -14,35 +14,9 @@ import {
   Range,
   type IDisposable,
 } from "monaco-editor-core";
-
-export interface WorkerAccessor<T> {
-  (...more: Uri[]): Promise<T>;
-}
-
-export interface IVueAdaptor
-  extends languages.HoverProvider,
-    languages.DocumentSymbolProvider,
-    languages.DocumentHighlightProvider,
-    languages.LinkedEditingRangeProvider,
-    languages.DefinitionProvider,
-    languages.ImplementationProvider,
-    languages.TypeDefinitionProvider,
-    languages.CodeLensProvider,
-    languages.CodeActionProvider,
-    Omit<languages.DocumentFormattingEditProvider, "displayName">,
-    Omit<languages.DocumentRangeFormattingEditProvider, "displayName">,
-    languages.OnTypeFormattingEditProvider,
-    languages.LinkProvider,
-    languages.CompletionItemProvider,
-    languages.DocumentColorProvider,
-    languages.FoldingRangeProvider,
-    languages.DeclarationProvider,
-    languages.SignatureHelpProvider,
-    languages.RenameProvider,
-    languages.ReferenceProvider,
-    languages.SelectionRangeProvider,
-    languages.InlayHintsProvider {}
-
+import { createDiagnosticsAdapter } from "./diagnostics";
+import { asDisposable, disposeAll } from "./utils";
+import { IVueAdaptor, WorkerAccessor } from "./types";
 class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
   private _completionItems = new WeakMap<
     languages.CompletionItem,
@@ -54,26 +28,28 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     languages.IColorInformation,
     vscode.ColorInformation
   >();
-  private _diagnostics = new WeakMap<editor.IMarkerData, vscode.Diagnostic>();
 
-  constructor(private readonly _worker: WorkerAccessor<T>) {}
+  constructor(
+    private readonly _worker: WorkerAccessor<T>,
+    private _diagnostics: WeakMap<editor.IMarkerData, vscode.Diagnostic>
+  ) {}
 
-  async provideDocumentSymbols(
+  provideDocumentSymbols = async (
     model: editor.ITextModel,
     token: CancellationToken
-  ): Promise<languages.DocumentSymbol[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDocumentSymbols(model.uri.toString());
     if (codeResult) {
       return codeResult.map(code2monaco.asDocumentSymbol);
     }
-  }
+  };
 
-  async provideDocumentHighlights(
+  provideDocumentHighlights = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.DocumentHighlight[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDocumentHighlights(
       model.uri.toString(),
@@ -82,13 +58,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asDocumentHighlight);
     }
-  }
+  };
 
-  async provideLinkedEditingRanges(
+  provideLinkedEditingRanges = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.LinkedEditingRanges | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findLinkedEditingRanges(
       model.uri.toString(),
@@ -102,13 +78,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
           : undefined,
       };
     }
-  }
+  };
 
-  async provideDefinition(
+  provideDefinition = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.Definition | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDefinition(
       model.uri.toString(),
@@ -118,13 +94,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asLocation);
     }
-  }
+  };
 
-  async provideImplementation(
+  provideImplementation = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.Definition | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findImplementations(
       model.uri.toString(),
@@ -133,13 +109,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asLocation);
     }
-  }
+  };
 
-  async provideTypeDefinition(
+  provideTypeDefinition = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.Definition | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findTypeDefinition(
       model.uri.toString(),
@@ -148,12 +124,12 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asLocation);
     }
-  }
+  };
 
-  async provideCodeLenses(
+  provideCodeLenses = async (
     model: editor.ITextModel,
     token: CancellationToken
-  ): Promise<languages.CodeLensList | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.doCodeLens(model.uri.toString());
     if (codeResult) {
@@ -166,12 +142,12 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         dispose: () => {},
       };
     }
-  }
+  };
 
-  async resolveCodeLens(
+  resolveCodeLens = async (
     model: editor.ITextModel,
     moncaoResult: languages.CodeLens
-  ) {
+  ) => {
     let codeResult = this._codeLens.get(moncaoResult);
     if (codeResult) {
       const worker = await this._worker(model.uri);
@@ -182,14 +158,14 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       }
     }
     return moncaoResult;
-  }
+  };
 
-  async provideCodeActions(
+  provideCodeActions = async (
     model: editor.ITextModel,
     range: Range,
     context: languages.CodeActionContext,
     token: CancellationToken
-  ): Promise<languages.CodeActionList | null | undefined> {
+  ) => {
     const diagnostics: vscode.Diagnostic[] = [];
     for (const marker of context.markers) {
       const diagnostic = this._diagnostics.get(marker);
@@ -217,9 +193,9 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         dispose: () => {},
       };
     }
-  }
+  };
 
-  async resolveCodeAction(moncaoResult: languages.CodeAction) {
+  resolveCodeAction = async (moncaoResult: languages.CodeAction) => {
     let codeResult = this._codeActions.get(moncaoResult);
     if (codeResult) {
       const worker = await this._worker();
@@ -230,14 +206,14 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       }
     }
     return moncaoResult;
-  }
+  };
 
   autoFormatTriggerCharacters = ["}", ";", "\n"];
-  async provideDocumentFormattingEdits(
+  provideDocumentFormattingEdits = async (
     model: editor.ITextModel,
     options: languages.FormattingOptions,
     token: CancellationToken
-  ): Promise<languages.TextEdit[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.format(
       model.uri.toString(),
@@ -246,14 +222,14 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asTextEdit);
     }
-  }
+  };
 
-  async provideDocumentRangeFormattingEdits(
+  provideDocumentRangeFormattingEdits = async (
     model: editor.ITextModel,
     range: Range,
     options: languages.FormattingOptions,
     token: CancellationToken
-  ): Promise<languages.TextEdit[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.format(
       model.uri.toString(),
@@ -263,15 +239,15 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asTextEdit);
     }
-  }
+  };
 
-  async provideOnTypeFormattingEdits(
+  provideOnTypeFormattingEdits = async (
     model: editor.ITextModel,
     position: Position,
     ch: string,
     options: languages.FormattingOptions,
     token: CancellationToken
-  ): Promise<languages.TextEdit[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.format(
       model.uri.toString(),
@@ -285,12 +261,9 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asTextEdit);
     }
-  }
+  };
 
-  async provideLinks(
-    model: editor.ITextModel,
-    token: CancellationToken
-  ): Promise<languages.ILinksList | null | undefined> {
+  provideLinks = async (model: editor.ITextModel, token: CancellationToken) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDocumentLinks(model.uri.toString());
     if (codeResult) {
@@ -298,15 +271,15 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         links: codeResult.map(code2monaco.asLink),
       };
     }
-  }
+  };
 
   triggerCharacters = "!@#$%^&*()_+-=`~{}|[]:\";'<>?,./ ".split("");
-  async provideCompletionItems(
+  provideCompletionItems = async (
     model: editor.ITextModel,
     position: Position,
     context: languages.CompletionContext,
     token: CancellationToken
-  ): Promise<languages.CompletionList | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.doComplete(
       model.uri.toString(),
@@ -321,12 +294,12 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       );
     }
     return monacoResult;
-  }
+  };
 
-  async resolveCompletionItem(
+  resolveCompletionItem = async (
     monacoItem: languages.CompletionItem,
     token: CancellationToken
-  ) {
+  ) => {
     let codeItem = this._completionItems.get(monacoItem);
     if (codeItem) {
       const worker = await this._worker();
@@ -335,23 +308,23 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
       this._completionItems.set(monacoItem, codeItem);
     }
     return monacoItem;
-  }
+  };
 
-  async provideDocumentColors(
+  provideDocumentColors = async (
     model: editor.ITextModel,
     token: CancellationToken
-  ): Promise<languages.IColorInformation[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDocumentColors(model.uri.toString());
     if (codeResult) {
       return codeResult.map(code2monaco.asColorInformation);
     }
-  }
+  };
 
-  async provideColorPresentations(
+  provideColorPresentations = async (
     model: editor.ITextModel,
     monacoResult: languages.IColorInformation
-  ) {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = this._colorInformations.get(monacoResult);
     if (codeResult) {
@@ -369,25 +342,25 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         return codeColors.map(code2monaco.asColorPresentation);
       }
     }
-  }
+  };
 
-  async provideFoldingRanges(
+  provideFoldingRanges = async (
     model: editor.ITextModel,
     context: languages.FoldingContext,
     token: CancellationToken
-  ): Promise<languages.FoldingRange[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.getFoldingRanges(model.uri.toString());
     if (codeResult) {
       return codeResult.map(code2monaco.asFoldingRange);
     }
-  }
+  };
 
-  async provideDeclaration(
+  provideDeclaration = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.Definition | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findDefinition(
       model.uri.toString(),
@@ -396,13 +369,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asLocation);
     }
-  }
+  };
 
-  async provideSelectionRanges(
+  provideSelectionRanges = async (
     model: editor.ITextModel,
     positions: Position[],
     token: CancellationToken
-  ): Promise<languages.SelectionRange[][] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResults = await Promise.all(
       positions.map((position) =>
@@ -414,15 +387,15 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     return codeResults.map(
       (codeResult) => codeResult?.map(code2monaco.asSelectionRange) ?? []
     );
-  }
+  };
 
   signatureHelpTriggerCharacters = ["(", ","];
-  async provideSignatureHelp(
+  provideSignatureHelp = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken,
     context: languages.SignatureHelpContext
-  ): Promise<languages.SignatureHelpResult | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.getSignatureHelp(
       model.uri.toString(),
@@ -434,16 +407,14 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         dispose: () => {},
       };
     }
-  }
+  };
 
-  async provideRenameEdits(
+  provideRenameEdits = async (
     model: editor.ITextModel,
     position: Position,
     newName: string,
     token: CancellationToken
-  ): Promise<
-    (languages.WorkspaceEdit & languages.Rejection) | null | undefined
-  > {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.doRename(
       model.uri.toString(),
@@ -453,14 +424,14 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return code2monaco.asWorkspaceEdit(codeResult);
     }
-  }
+  };
 
-  async provideReferences(
+  provideReferences = async (
     model: editor.ITextModel,
     position: Position,
     context: languages.ReferenceContext,
     token: CancellationToken
-  ): Promise<languages.Location[] | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.findReferences(
       model.uri.toString(),
@@ -470,13 +441,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return codeResult.map(code2monaco.asLocation);
     }
-  }
+  };
 
-  async provideInlayHints(
+  provideInlayHints = async (
     model: editor.ITextModel,
     range: Range,
     token: CancellationToken
-  ): Promise<languages.InlayHintList | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.getInlayHints(
       model.uri.toString(),
@@ -488,13 +459,13 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
         dispose: () => {},
       };
     }
-  }
+  };
 
-  async provideHover(
+  provideHover = async (
     model: editor.ITextModel,
     position: Position,
     token: CancellationToken
-  ): Promise<languages.Hover | null | undefined> {
+  ) => {
     const worker = await this._worker(model.uri);
     const codeResult = await worker.doHover(
       model.uri.toString(),
@@ -503,31 +474,7 @@ class WorkerAdapter<T extends VueWorker> implements IVueAdaptor {
     if (codeResult) {
       return code2monaco.asHover(codeResult);
     }
-  }
-
-  private _toMarkers(errors: vscode.Diagnostic[]) {
-    return errors.map(error => {
-        const marker = code2monaco.asMarkerData(error);
-        this._diagnostics.set(marker, error);
-        return marker;
-    });
-  }
-  
-  async doValidation (model: editor.ITextModel) {
-    const worker = await this._worker(model.uri);
-    const diagnostics = await worker.doValidation(model.uri.toString(), unfinishResult => {
-        editor.setModelMarkers(
-            model,
-            'vue',
-            this._toMarkers(unfinishResult),
-        );
-    });
-    editor.setModelMarkers(
-        model,
-        'vue',
-        this._toMarkers(diagnostics),
-    );
-  }
+  };
 }
 
 export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
@@ -543,7 +490,8 @@ export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
     return client.getLanguageServiceWorker(...uris);
   };
 
-  const adapter = new WorkerAdapter(worker);
+  const diagnostic = new WeakMap<editor.IMarkerData, vscode.Diagnostic>();
+  const adapter = new WorkerAdapter(worker, diagnostic);
 
   function registerProviders(): void {
     const { languageId } = defaults;
@@ -575,7 +523,9 @@ export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
       languages.registerFoldingRangeProvider(languageId, adapter),
       languages.registerDeclarationProvider(languageId, adapter),
       languages.registerSelectionRangeProvider(languageId, adapter),
-      languages.registerInlayHintsProvider(languageId, adapter)
+      languages.registerInlayHintsProvider(languageId, adapter),
+
+      createDiagnosticsAdapter(defaults, languageId, worker, () => diagnostic)
     );
   }
 
@@ -592,14 +542,4 @@ export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
   disposables.push(asDisposable(providers));
 
   return asDisposable(disposables);
-}
-
-function asDisposable(disposables: IDisposable[]): IDisposable {
-  return { dispose: () => disposeAll(disposables) };
-}
-
-function disposeAll(disposables: IDisposable[]) {
-  while (disposables.length) {
-    disposables.pop()!.dispose();
-  }
 }

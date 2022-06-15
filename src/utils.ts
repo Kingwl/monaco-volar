@@ -1,4 +1,4 @@
-import { Uri, editor } from "monaco-editor-core";
+import { Uri, editor, IDisposable } from "monaco-editor-core";
 
 export function debounce(fn: Function, n = 100) {
   let handle: any;
@@ -21,4 +21,20 @@ export function getOrCreateModel(
     return model;
   }
   return editor.createModel(value, lang, uri);
+}
+
+export function asDisposable(disposables: IDisposable[]): IDisposable {
+  return { dispose: () => disposeAll(disposables) };
+}
+
+export function disposeAll(disposables: IDisposable[]) {
+  while (disposables.length) {
+    disposables.pop()!.dispose();
+  }
+}
+
+export function createDisposable(cb: () => void): IDisposable {
+  return {
+    dispose: cb,
+  };
 }
