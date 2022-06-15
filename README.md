@@ -105,7 +105,7 @@ const model = editor.createModel(code, 'vue', uri);
 ```
 
 
-## Api
+## API
 
 ## Add extra lib
 
