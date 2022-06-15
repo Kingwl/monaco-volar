@@ -28,7 +28,7 @@ import 'monaco-volar'
 
 #### Init Onigasm
 
-VSCode are using Onigasm to highlight codes. Do we have adapted the Onigasm and monaco. And some pre-defined grammars.
+VSCode are using Onigasm to highlight codes. And we have adapted the Onigasm and monaco. And some pre-defined grammars.
 
 Onigasm needs a wasm module before using. We have to load it first.
 
@@ -102,4 +102,13 @@ Now we can just create a model using vue language.
 
 ```ts
 const model = editor.createModel(code, 'vue', uri);
+```
+
+
+## Api
+
+## Add extra lib
+
+```ts
+monaco.languages.vue.vueDefaults.addExtraLib(uri, code);
 ```
