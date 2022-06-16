@@ -1,5 +1,7 @@
 # monaco-volar
 
+**[Try it!](https://kingwl.github.io/monaco-volar/)**
+
 ## Install
 
 `Monaco-volar` has external dependency Onigasm (to highlight code).
