@@ -10,6 +10,11 @@ export default defineConfig({
       plugins: [externalCjsToEsmPlugin(externals)],
     },
   },
+  resolve: {
+    alias: {
+      path: "path-browserify",
+    },
+  },
   build: {
     minify: false,
     lib: {
