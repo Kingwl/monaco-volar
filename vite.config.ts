@@ -12,8 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      path: "path-browserify",
-    },
+      path: 'path-browserify',
+    }
   },
   build: {
     minify: false,
