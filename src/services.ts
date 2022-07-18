@@ -73,7 +73,6 @@ export function getLanguageServiceAndDocumentsService(
       return "unknown version";
     },
     getScriptSnapshot(fileName: string): ts.IScriptSnapshot | undefined {
-      console.log("getScriptSnapshot", fileName);
       let scriptSnapshot = scriptSnapshots.get(fileName);
       if (
         !scriptSnapshot ||
