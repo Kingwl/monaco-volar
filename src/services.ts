@@ -93,6 +93,9 @@ export function getLanguageServiceAndDocumentsService(
     getDefaultLibFileName(options: ts.CompilerOptions): string {
       return ts.getDefaultLibFileName(options);
     },
+    getTypeScriptModule() {
+      return ts;
+    },
   };
   const sys: ts.System = {
     args: [],
@@ -155,19 +158,13 @@ export function getLanguageServiceAndDocumentsService(
     rootUris: ["/"],
   };
   const ls = createLanguageService(
-    { typescript: ts },
     host,
     undefined,
     undefined,
     configurationHost,
     []
   );
-  const ds = getDocumentService(
-    { typescript: ts },
-    configurationHost,
-    undefined,
-    []
-  );
+  const ds = getDocumentService(ts, configurationHost, undefined, []);
 
   return {
     ls,
