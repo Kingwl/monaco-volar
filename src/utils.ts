@@ -38,3 +38,7 @@ export function createDisposable(cb: () => void): IDisposable {
     dispose: cb,
   };
 }
+
+export function normalizePath(path: string): string {
+  return path.replace(/\\/g, "/");
+}

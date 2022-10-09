@@ -9,7 +9,7 @@ import vueRuntimeCoreContent from "@vue/runtime-core/dist/runtime-core.d.ts?raw"
 import vueRuntimeDomContent from "@vue/runtime-dom/dist/runtime-dom.d.ts?raw";
 import vueReactivityContent from "@vue/reactivity/dist/reactivity.d.ts?raw";
 import vueSharedContent from "@vue/shared/dist/shared.d.ts?raw";
-import { getOrCreateModel } from "./utils";
+import { getOrCreateModel, normalizePath } from "./utils";
 
 export function prepareVirtualFiles() {
   const libEs5Url = Uri.parse("file:///lib.es5.d.ts");
@@ -63,40 +63,40 @@ export function prepareVirtualFiles() {
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    libEs5Model.uri.fsPath,
+    normalizePath(libEs5Model.uri.fsPath),
     libEs5Model.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libDomModel.uri.fsPath,
+    normalizePath(libDomModel.uri.fsPath),
     libDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libPromiseModel.uri.fsPath,
+    normalizePath(libPromiseModel.uri.fsPath),
     libPromiseModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libDtsModel.uri.fsPath,
+    normalizePath(libDtsModel.uri.fsPath),
     libDtsModel.getValue()
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    vueModel.uri.fsPath,
+    normalizePath(vueModel.uri.fsPath),
     vueModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueRuntimeDomModel.uri.fsPath,
+    normalizePath(vueRuntimeDomModel.uri.fsPath),
     vueRuntimeDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueRuntimeCoreModel.uri.fsPath,
+    normalizePath(vueRuntimeCoreModel.uri.fsPath),
     vueRuntimeCoreModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueSharedModel.uri.fsPath,
+    normalizePath(vueSharedModel.uri.fsPath),
     vueSharedModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueReactivityModel.uri.fsPath,
+    normalizePath(vueReactivityModel.uri.fsPath),
     vueReactivityModel.getValue()
   );
 }

@@ -20,7 +20,10 @@ export function getLanguageServiceAndDocumentsService(
 
   const findInModels = (fileName: string) => {
     return getModels().find((x) => {
-      return x.uri.toString() === fileName || x.uri.fsPath === fileName;
+      return (
+        x.uri.toString() === fileName ||
+        x.uri.fsPath.replace(/\\/g, "/") === fileName
+      );
     });
   };
 
@@ -54,7 +57,9 @@ export function getLanguageServiceAndDocumentsService(
       return {};
     },
     getScriptFileNames(): string[] {
-      const modelNames = getModels().map((x) => x.uri.fsPath);
+      const modelNames = getModels().map((x) =>
+        x.uri.fsPath.replace(/\\/g, "/")
+      );
       const extraLibNames = Object.keys(getExtraLibs());
       const fileNames = [...modelNames, ...extraLibNames];
       return fileNames;
