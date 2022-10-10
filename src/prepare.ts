@@ -1,4 +1,5 @@
 import { Uri, languages } from "monaco-editor-core";
+import { getOrCreateModel } from "./utils";
 
 import libEs5Content from "typescript/lib/lib.es5.d.ts?raw";
 import libDomContent from "typescript/lib/lib.dom.d.ts?raw";
@@ -9,7 +10,6 @@ import vueRuntimeCoreContent from "@vue/runtime-core/dist/runtime-core.d.ts?raw"
 import vueRuntimeDomContent from "@vue/runtime-dom/dist/runtime-dom.d.ts?raw";
 import vueReactivityContent from "@vue/reactivity/dist/reactivity.d.ts?raw";
 import vueSharedContent from "@vue/shared/dist/shared.d.ts?raw";
-import { getOrCreateModel, normalizePath } from "./utils";
 
 export function prepareVirtualFiles() {
   const libEs5Url = Uri.parse("file:///lib.es5.d.ts");
@@ -63,40 +63,40 @@ export function prepareVirtualFiles() {
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(libEs5Model.uri.fsPath),
+    libEs5Model.uri.fsPath,
     libEs5Model.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(libDomModel.uri.fsPath),
+    libDomModel.uri.fsPath,
     libDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(libPromiseModel.uri.fsPath),
+    libPromiseModel.uri.fsPath,
     libPromiseModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(libDtsModel.uri.fsPath),
+    libDtsModel.uri.fsPath,
     libDtsModel.getValue()
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(vueModel.uri.fsPath),
+    vueModel.uri.fsPath,
     vueModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(vueRuntimeDomModel.uri.fsPath),
+    vueRuntimeDomModel.uri.fsPath,
     vueRuntimeDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(vueRuntimeCoreModel.uri.fsPath),
+    vueRuntimeCoreModel.uri.fsPath,
     vueRuntimeCoreModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(vueSharedModel.uri.fsPath),
+    vueSharedModel.uri.fsPath,
     vueSharedModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    normalizePath(vueReactivityModel.uri.fsPath),
+    vueReactivityModel.uri.fsPath,
     vueReactivityModel.getValue()
   );
 }

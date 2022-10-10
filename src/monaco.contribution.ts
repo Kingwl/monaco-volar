@@ -1,6 +1,6 @@
 import type * as mode from "./vueMode";
 import { Emitter, type IEvent, languages } from "monaco-editor-core";
-import { debounce } from "./utils";
+import { debounce, normalizePath } from "./utils";
 
 export interface ModeConfiguration {
   hovers?: boolean;
@@ -50,7 +50,8 @@ class LanguageServiceDefaultsImpl implements LanguageServiceDefaults {
   }
 
   addExtraLib(uri: string, content: string) {
-    this._extraLibs[uri] = content;
+    const normalizedUri = normalizePath(uri);
+    this._extraLibs[normalizedUri] = content;
     this.fireExtraLibChangeSoon();
   }
 
