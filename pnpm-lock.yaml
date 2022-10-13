@@ -14,6 +14,7 @@ specifiers:
   onigasm: ^2.2.5
   path-browserify: ^1.0.1
   prettier: ^2.6.2
+  typesafe-path: ^0.2.1
   typescript: ^4.7.3
   vite: ^3.0.0-alpha.11
   vscode-languageserver-protocol: ^3.17.2
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   monaco-editor-core: 0.33.0
   onigasm: 2.2.5
+  typesafe-path: 0.2.1
 
 devDependencies:
   '@types/node': 17.0.42
@@ -713,7 +715,6 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
       yallist: 3.1.1
-    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -765,7 +766,6 @@ packages:
     resolution: {integrity: sha1-zE0qeaD6C2TK7B9MfqNnWFpnaJI=}
     dependencies:
       lru-cache: 5.1.1
-    dev: false
 
   /path-browserify/1.0.1:
     resolution: {integrity: sha1-2YRUqcN1PVeQhg8W9ohnueRr4f0=}
@@ -944,6 +944,10 @@ packages:
     resolution: {integrity: sha1-zCAOqyYT9BZtJ/+a/HylbUnfbrQ=}
     dev: true
 
+  /typesafe-path/0.2.1:
+    resolution: {integrity: sha512-dngiIyVnCiCxyRaWwhi1aCBF8amSdjARnwaIjGVRmkzZ1613RLIi/B33VWn6/ofLlBzi/teHf5t7RnZtbOerbg==}
+    dev: false
+
   /typescript/4.7.3:
     resolution: {integrity: sha512-WOkT3XYvrpXx4vMMqlD+8R8R37fZkjyLGlxavMc4iB8lrl8L0DeTcHbYgw/v0N/z9wAFsgBhcsF0ruoySS22mA==}
     engines: {node: '>=4.2.0'}
@@ -1069,7 +1073,6 @@ packages:
 
   /yallist/3.1.1:
     resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=}
-    dev: false
 
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}

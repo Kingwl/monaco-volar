@@ -1,6 +1,7 @@
 import type * as mode from "./vueMode";
 import { Emitter, type IEvent, languages } from "monaco-editor-core";
-import { debounce } from "./utils";
+import { debounce, normalizePath } from "./utils";
+import * as path from "typesafe-path";
 
 export interface ModeConfiguration {
   hovers?: boolean;
@@ -11,8 +12,8 @@ export interface LanguageServiceDefaults {
   readonly onDidChange: IEvent<LanguageServiceDefaults>;
   readonly onExtraLibChange: IEvent<LanguageServiceDefaults>;
   readonly modeConfiguration: ModeConfiguration;
-  addExtraLib(uri: string, content: string): void;
-  getExtraLibs(): Record<string, string>;
+  addExtraLib(uri: path.OsPath | path.PosixPath, content: string): void;
+  getExtraLibs(): Record<path.PosixPath, string>;
 }
 
 class LanguageServiceDefaultsImpl implements LanguageServiceDefaults {
@@ -21,7 +22,7 @@ class LanguageServiceDefaultsImpl implements LanguageServiceDefaults {
   private _modeConfiguration!: ModeConfiguration;
   private _languageId: string;
 
-  private _extraLibs: Record<string, string> = {};
+  private _extraLibs: Record<path.PosixPath, string> = {};
 
   constructor(languageId: string, modeConfiguration: ModeConfiguration) {
     this._languageId = languageId;
@@ -49,8 +50,9 @@ class LanguageServiceDefaultsImpl implements LanguageServiceDefaults {
     this._onDidChange.fire(this);
   }
 
-  addExtraLib(uri: string, content: string) {
-    this._extraLibs[uri] = content;
+  addExtraLib(uri: path.OsPath | path.PosixPath, content: string) {
+    const normalizedUri = normalizePath(uri);
+    this._extraLibs[normalizedUri] = content;
     this.fireExtraLibChangeSoon();
   }
 

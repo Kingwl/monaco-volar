@@ -6,6 +6,7 @@ import {
   type LanguageServiceHost,
   type ConfigurationHost,
 } from "@volar/vue-language-service";
+import path from "typesafe-path";
 
 interface LsAndDs {
   ls: ReturnType<typeof createLanguageService>;
@@ -14,32 +15,38 @@ interface LsAndDs {
 
 export function getLanguageServiceAndDocumentsService(
   getModels: () => worker.IMirrorModel[],
-  getExtraLibs: () => Record<string, string>
+  getExtraLibs: () => Record<path.PosixPath, string>
 ): LsAndDs {
   const scriptSnapshots = new Map<string, ts.IScriptSnapshot>();
 
-  const findInModels = (fileName: string) => {
+  const findInModels = (fileName: path.PosixPath) => {
     return getModels().find((x) => {
-      return x.uri.toString() === fileName || x.uri.fsPath === fileName;
+      return (
+        x.uri.toString() === fileName ||
+        normalizePath(x.uri.fsPath as path.OsPath) === fileName
+      );
     });
   };
 
-  const findInExtraLibs = (fileName: string): string | undefined => {
+  const findInExtraLibs = (fileName: path.PosixPath): string | undefined => {
     return getExtraLibs()[fileName];
   };
 
   const host: LanguageServiceHost = {
-    readFile(fileName) {
-      const model = findInModels(fileName);
+    readFile(fileName: string) {
+      const model = findInModels(fileName as path.PosixPath);
       if (model) {
         return model.getValue();
       }
 
-      const extraLibs = findInExtraLibs(fileName);
+      const extraLibs = findInExtraLibs(fileName as path.PosixPath);
       return extraLibs;
     },
-    fileExists(fileName) {
-      return !!(findInModels(fileName) || findInExtraLibs(fileName));
+    fileExists(fileName: string) {
+      return !!(
+        findInModels(fileName as path.PosixPath) ||
+        findInExtraLibs(fileName as path.PosixPath)
+      );
     },
     getCompilationSettings(): ts.CompilerOptions {
       return {
@@ -54,18 +61,20 @@ export function getLanguageServiceAndDocumentsService(
       return {};
     },
     getScriptFileNames(): string[] {
-      const modelNames = getModels().map((x) => x.uri.fsPath);
-      const extraLibNames = Object.keys(getExtraLibs());
+      const modelNames = getModels().map((x) =>
+        normalizePath(x.uri.fsPath as path.OsPath)
+      );
+      const extraLibNames = keysOf(getExtraLibs());
       const fileNames = [...modelNames, ...extraLibNames];
       return fileNames;
     },
     getScriptVersion(fileName: string): string {
-      const model = findInModels(fileName);
+      const model = findInModels(fileName as path.PosixPath);
       if (model) {
         return `${model.version}`;
       }
 
-      const extraLibs = findInExtraLibs(fileName);
+      const extraLibs = findInExtraLibs(fileName as path.PosixPath);
       if (extraLibs) {
         return "1";
       }
@@ -170,4 +179,12 @@ export function getLanguageServiceAndDocumentsService(
     ls,
     ds,
   };
+}
+
+function keysOf<T extends Object>(arr: T) {
+  return Object.keys(arr) as Array<keyof T>;
+}
+
+function normalizePath(path: string) {
+  return path.replace(/\\/g, "/") as path.PosixPath;
 }

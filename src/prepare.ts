@@ -1,4 +1,6 @@
 import { Uri, languages } from "monaco-editor-core";
+import { getOrCreateModel } from "./utils";
+import * as path from "typesafe-path";
 
 import libEs5Content from "typescript/lib/lib.es5.d.ts?raw";
 import libDomContent from "typescript/lib/lib.dom.d.ts?raw";
@@ -9,7 +11,6 @@ import vueRuntimeCoreContent from "@vue/runtime-core/dist/runtime-core.d.ts?raw"
 import vueRuntimeDomContent from "@vue/runtime-dom/dist/runtime-dom.d.ts?raw";
 import vueReactivityContent from "@vue/reactivity/dist/reactivity.d.ts?raw";
 import vueSharedContent from "@vue/shared/dist/shared.d.ts?raw";
-import { getOrCreateModel } from "./utils";
 
 export function prepareVirtualFiles() {
   const libEs5Url = Uri.parse("file:///lib.es5.d.ts");
@@ -63,40 +64,40 @@ export function prepareVirtualFiles() {
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    libEs5Model.uri.fsPath,
+    libEs5Model.uri.fsPath as path.OsPath,
     libEs5Model.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libDomModel.uri.fsPath,
+    libDomModel.uri.fsPath as path.OsPath,
     libDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libPromiseModel.uri.fsPath,
+    libPromiseModel.uri.fsPath as path.OsPath,
     libPromiseModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    libDtsModel.uri.fsPath,
+    libDtsModel.uri.fsPath as path.OsPath,
     libDtsModel.getValue()
   );
 
   languages.vue.vueDefaults.addExtraLib(
-    vueModel.uri.fsPath,
+    vueModel.uri.fsPath as path.OsPath,
     vueModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueRuntimeDomModel.uri.fsPath,
+    vueRuntimeDomModel.uri.fsPath as path.OsPath,
     vueRuntimeDomModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueRuntimeCoreModel.uri.fsPath,
+    vueRuntimeCoreModel.uri.fsPath as path.OsPath,
     vueRuntimeCoreModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueSharedModel.uri.fsPath,
+    vueSharedModel.uri.fsPath as path.OsPath,
     vueSharedModel.getValue()
   );
   languages.vue.vueDefaults.addExtraLib(
-    vueReactivityModel.uri.fsPath,
+    vueReactivityModel.uri.fsPath as path.OsPath,
     vueReactivityModel.getValue()
   );
 }
