@@ -91,6 +91,7 @@ export function asCompletionItem(
     filterText: item.filterText,
     preselect: item.preselect,
     insertText: item.textEdit?.newText ?? item.insertText ?? item.label,
+    insertTextRules: languages.CompletionItemInsertTextRule.InsertAsSnippet,
     range: asCompletionItemRange(item.textEdit),
     commitCharacters: item.commitCharacters,
     additionalTextEdits: item.additionalTextEdits?.map(asTextEdit),
