@@ -30,7 +30,7 @@
   "homepage": "https://github.com/Kingwl/monaco-volar#readme",
   "devDependencies": {
     "@types/node": "^17.0.42",
-    "@volar/vue-language-service": "0.39.0",
+    "@volar/vue-language-service": "^1.0.10",
     "@vue/reactivity": "^3.2.37",
     "@vue/runtime-core": "^3.2.37",
     "@vue/runtime-dom": "^3.2.37",
@@ -54,7 +54,8 @@
   "dependencies": {
     "monaco-editor-core": "^0.33.0",
     "onigasm": "^2.2.5",
-    "typesafe-path": "^0.2.1"
+    "typesafe-path": "^0.2.1",
+    "vscode-uri": "^3.0.6"
   },
   "scripts": {
     "build:lib": "vite build -c ./scripts/vite.lib.config.ts",

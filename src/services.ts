@@ -2,15 +2,16 @@ import type { worker } from "monaco-editor-core";
 import * as ts from "typescript/lib/tsserverlibrary";
 import {
   createLanguageService,
-  getDocumentService,
+  createDocumentService,
   type LanguageServiceHost,
   type ConfigurationHost,
 } from "@volar/vue-language-service";
 import path from "typesafe-path";
+import { URI } from "vscode-uri";
 
 interface LsAndDs {
   ls: ReturnType<typeof createLanguageService>;
-  ds: ReturnType<typeof getDocumentService>;
+  ds: ReturnType<typeof createDocumentService>;
 }
 
 export function getLanguageServiceAndDocumentsService(
@@ -164,16 +165,15 @@ export function getLanguageServiceAndDocumentsService(
       return undefined as any;
     },
     onDidChangeConfiguration() {},
-    rootUris: ["/"],
   };
-  const ls = createLanguageService(
-    host,
-    undefined,
-    undefined,
+  const ls = createLanguageService(host, {
+    rootUri: URI.file("/"),
     configurationHost,
-    []
-  );
-  const ds = getDocumentService(ts, configurationHost, undefined, []);
+  });
+  const ds = createDocumentService(ts, {
+    rootUri: URI.file("/"),
+    configurationHost,
+  });
 
   return {
     ls,
