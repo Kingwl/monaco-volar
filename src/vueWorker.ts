@@ -8,7 +8,6 @@ export interface ICreateData {
 }
 
 type LSType = ReturnType<typeof getLanguageServiceAndDocumentsService>["ls"];
-type DSType = ReturnType<typeof getLanguageServiceAndDocumentsService>["ds"];
 
 type TailArgs<T extends (...args: any[]) => void> = T extends (
   a: any,
@@ -28,7 +27,6 @@ export class VueWorker {
   private _ctx: worker.IWorkerContext;
 
   private _ls: LSType;
-  private _ds: DSType;
   private _extraLibs: Record<string, string>;
   private _modelDocuments = new WeakMap<
     worker.IMirrorModel,
@@ -40,12 +38,11 @@ export class VueWorker {
     this._languageId = createData.languageId;
     this._extraLibs = createData.extraLibs ?? {};
 
-    const { ls, ds } = getLanguageServiceAndDocumentsService(
+    const { ls } = getLanguageServiceAndDocumentsService(
       () => this._ctx.getMirrorModels(),
       () => this._extraLibs
     );
     this._ls = ls;
-    this._ds = ds;
   }
 
   updateExtraLibs(extraLibs: Record<string, string>) {
@@ -63,9 +60,9 @@ export class VueWorker {
     }
   }
 
-  async doDSAutoInsert(uri: string, ...args: TailArgs<DSType["doAutoInsert"]>) {
+  async doDSAutoInsert(uri: string, ...args: TailArgs<LSType["doAutoInsert"]>) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.doAutoInsert(document, ...args);
+      return await this._ls.doAutoInsert(document.uri, ...args);
     });
   }
 
@@ -75,61 +72,61 @@ export class VueWorker {
 
   async getFoldingRanges(
     uri: string,
-    ...args: TailArgs<DSType["getFoldingRanges"]>
+    ...args: TailArgs<LSType["getFoldingRanges"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.getFoldingRanges(document, ...args);
+      return await this._ls.getFoldingRanges(document.uri, ...args);
     });
   }
 
   async getColorPresentations(
     uri: string,
-    ...args: TailArgs<DSType["getColorPresentations"]>
+    ...args: TailArgs<LSType["getColorPresentations"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.getColorPresentations(document, ...args);
+      return await this._ls.getColorPresentations(document.uri, ...args);
     });
   }
 
   async getSelectionRanges(
     uri: string,
-    ...args: TailArgs<DSType["getSelectionRanges"]>
+    ...args: TailArgs<LSType["getSelectionRanges"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.getSelectionRanges(document, ...args);
+      return await this._ls.getSelectionRanges(document.uri, ...args);
     });
   }
 
   async findDocumentColors(
     uri: string,
-    ...args: TailArgs<DSType["findDocumentColors"]>
+    ...args: TailArgs<LSType["findDocumentColors"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.findDocumentColors(document, ...args);
+      return await this._ls.findDocumentColors(document.uri, ...args);
     });
   }
 
   async findDocumentSymbols(
     uri: string,
-    ...args: TailArgs<DSType["findDocumentSymbols"]>
+    ...args: TailArgs<LSType["findDocumentSymbols"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.findDocumentSymbols(document, ...args);
+      return await this._ls.findDocumentSymbols(document.uri, ...args);
     });
   }
 
   async findLinkedEditingRanges(
     uri: string,
-    ...args: TailArgs<DSType["findLinkedEditingRanges"]>
+    ...args: TailArgs<LSType["findLinkedEditingRanges"]>
   ) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.findLinkedEditingRanges(document, ...args);
+      return await this._ls.findLinkedEditingRanges(document.uri, ...args);
     });
   }
 
-  async format(uri: string, ...args: TailArgs<DSType["format"]>) {
+  async format(uri: string, ...args: TailArgs<LSType["format"]>) {
     return this.runWithDocument(uri, async (document) => {
-      return await this._ds.format(document, ...args);
+      return await this._ls.format(document.uri, ...args);
     });
   }
 

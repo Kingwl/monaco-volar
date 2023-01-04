@@ -2,8 +2,7 @@ import type { worker } from "monaco-editor-core";
 import * as ts from "typescript/lib/tsserverlibrary";
 import {
   createLanguageService,
-  createDocumentService,
-  type LanguageServiceHost,
+  type VueLanguageServiceHost,
   type ConfigurationHost,
 } from "@volar/vue-language-service";
 import path from "typesafe-path";
@@ -11,7 +10,6 @@ import { URI } from "vscode-uri";
 
 interface LsAndDs {
   ls: ReturnType<typeof createLanguageService>;
-  ds: ReturnType<typeof createDocumentService>;
 }
 
 export function getLanguageServiceAndDocumentsService(
@@ -33,7 +31,7 @@ export function getLanguageServiceAndDocumentsService(
     return getExtraLibs()[fileName];
   };
 
-  const host: LanguageServiceHost = {
+  const host: VueLanguageServiceHost = {
     readFile(fileName: string) {
       const model = findInModels(fileName as path.PosixPath);
       if (model) {
@@ -170,14 +168,9 @@ export function getLanguageServiceAndDocumentsService(
     rootUri: URI.file("/"),
     configurationHost,
   });
-  const ds = createDocumentService(ts, {
-    rootUri: URI.file("/"),
-    configurationHost,
-  });
 
   return {
     ls,
-    ds,
   };
 }
 
