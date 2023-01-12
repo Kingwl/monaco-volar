@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 
 const msg = ref('hello world')
-
 </script>
+
 <template>
-    <div>{{msg}}</div>
+    <div>{{ msg }}</div>
 </template>
