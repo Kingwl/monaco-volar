@@ -8,7 +8,7 @@ specifiers:
   '@vue/runtime-dom': ^3.2.37
   '@vue/shared': ^3.2.37
   esbuild: ^0.14.43
-  monaco-editor-core: ^0.33.0
+  monaco-editor: ^0.33.0
   monaco-editor-textmate: ^3.0.0
   monaco-textmate: ^3.0.1
   onigasm: ^2.2.5
@@ -22,7 +22,7 @@ specifiers:
   vue: ^3.2.37
 
 dependencies:
-  monaco-editor-core: 0.33.0
+  monaco-editor: 0.33.0
   onigasm: 2.2.5
   typesafe-path: 0.2.1
   vscode-uri: 3.0.6
@@ -35,7 +35,7 @@ devDependencies:
   '@vue/runtime-dom': 3.2.37
   '@vue/shared': 3.2.37
   esbuild: 0.14.43
-  monaco-editor-textmate: 3.0.0_monaco-textmate@3.0.1
+  monaco-editor-textmate: 3.0.0_nurowwtvogix47pnszh4m7lsnu
   monaco-textmate: 3.0.1_onigasm@2.2.5
   path-browserify: 1.0.1
   prettier: 2.6.2
@@ -846,7 +846,6 @@ packages:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
       yallist: 3.1.1
-    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -868,18 +867,18 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /monaco-editor-core/0.33.0:
-    resolution: {integrity: sha512-Kzxak8jnMS8vI08DcseBuOfeQlcVPpGXO210D8M+QnaNR92s4IYzgUeiow/Hld9Gi5pGvjDbPsdUXkPewoTA5g==}
-    dev: false
-
-  /monaco-editor-textmate/3.0.0_monaco-textmate@3.0.1:
+  /monaco-editor-textmate/3.0.0_nurowwtvogix47pnszh4m7lsnu:
     resolution: {integrity: sha1-qQUXOA1eUjBK73gO6+q59oerm2c=}
     peerDependencies:
       monaco-editor: 0.x.x
       monaco-textmate: ^3.0.0
     dependencies:
+      monaco-editor: 0.33.0
       monaco-textmate: 3.0.1_onigasm@2.2.5
     dev: true
+
+  /monaco-editor/0.33.0:
+    resolution: {integrity: sha512-VcRWPSLIUEgQJQIE0pVT8FcGBIgFoxz7jtqctE+IiCxWugD0DwgyQBcZBhdSrdMC84eumoqMZsGl2GTreOzwqw==}
 
   /monaco-textmate/3.0.1_onigasm@2.2.5:
     resolution: {integrity: sha1-ttJtJmqhLtr/cGna4NbjdHy6XNc=}
@@ -909,7 +908,6 @@ packages:
     resolution: {integrity: sha1-zE0qeaD6C2TK7B9MfqNnWFpnaJI=}
     dependencies:
       lru-cache: 5.1.1
-    dev: false
 
   /path-browserify/1.0.1:
     resolution: {integrity: sha1-2YRUqcN1PVeQhg8W9ohnueRr4f0=}
@@ -1227,7 +1225,6 @@ packages:
 
   /yallist/3.1.1:
     resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=}
-    dev: false
 
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}

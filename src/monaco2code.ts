@@ -1,4 +1,4 @@
-import { Position, IRange, languages } from "monaco-editor-core";
+import { Position, IRange, languages } from "monaco-editor";
 import * as vscode from "vscode-languageserver-protocol";
 
 export function asPosition(position: Position): vscode.Position {

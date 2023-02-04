@@ -1,5 +1,5 @@
 import type * as mode from "./vueMode";
-import { Emitter, type IEvent, languages } from "monaco-editor-core";
+import { Emitter, type IEvent, languages } from "monaco-editor";
 import { debounce, normalizePath } from "./utils";
 import * as path from "typesafe-path";
 
@@ -72,7 +72,7 @@ const modeConfigurationDefault: Required<ModeConfiguration> = {
 export const vueDefaults: LanguageServiceDefaults =
   new LanguageServiceDefaultsImpl("vue", modeConfigurationDefault);
 
-declare module "monaco-editor-core" {
+declare module "monaco-editor" {
   export namespace languages {
     export let vue: { vueDefaults: LanguageServiceDefaults };
   }

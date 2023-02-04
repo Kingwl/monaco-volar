@@ -1,4 +1,4 @@
-import { Uri, languages } from "monaco-editor-core";
+import { Uri, languages } from "monaco-editor";
 import { getOrCreateModel } from "./utils";
 import * as path from "typesafe-path";
 

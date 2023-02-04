@@ -1,4 +1,4 @@
-import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
+import * as worker from "monaco-editor/esm/vs/editor/editor.worker";
 import { VueWorker } from "./vueWorker";
 
 self.onmessage = () => {

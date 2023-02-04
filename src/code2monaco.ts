@@ -7,7 +7,7 @@ import {
   MarkerTag,
   MarkerSeverity,
   Position,
-} from "monaco-editor-core";
+} from "monaco-editor";
 import * as vscode from "vscode-languageserver-protocol";
 
 export function asCompletionList(

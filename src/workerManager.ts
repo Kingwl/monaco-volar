@@ -1,6 +1,6 @@
 import { LanguageServiceDefaults } from "./monaco.contribution";
 import type { ICreateData, VueWorker } from "./vueWorker";
-import { type IDisposable, Uri, editor } from "monaco-editor-core";
+import { type IDisposable, Uri, editor } from "monaco-editor";
 
 const STOP_WHEN_IDLE_FOR = 2 * 60 * 1000; // 2min
 

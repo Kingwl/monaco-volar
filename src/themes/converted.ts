@@ -1,4 +1,4 @@
-import type * as monaco from 'monaco-editor-core';
+import type * as monaco from 'monaco-editor';
 
 export const theme: monaco.editor.IStandaloneThemeData = {
   inherit: false,

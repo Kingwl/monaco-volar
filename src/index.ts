@@ -1,4 +1,4 @@
-import { editor } from "monaco-editor-core";
+import { editor } from "monaco-editor";
 import "./monaco.contribution";
 
 export const loadTheme = async () => {
