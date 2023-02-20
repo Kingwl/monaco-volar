@@ -1,6 +1,7 @@
 import type { worker } from "monaco-editor-core";
 import * as ts from "typescript/lib/tsserverlibrary";
 import {
+  createConfig,
   createLanguageService,
   type VueLanguageServiceHost,
 } from "@volar/vue-language-service";
@@ -146,8 +147,11 @@ export function getLanguageServiceAndDocumentsService(
   // @ts-expect-error
   ts.setSys(sys);
 
-  return createLanguageService(host, {
+  return createLanguageService(host, createConfig({}, ts, {}, {}), {
     rootUri: URI.file("/"),
+    documentContext: {
+      resolveReference: (ref, base) => undefined,
+    },
   });
 }
 

@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/node': ^17.0.42
-  '@volar/vue-language-service': ^1.1.4
+  '@volar/vue-language-service': 1.1.4-patch.1
   '@vue/reactivity': ^3.2.37
   '@vue/runtime-core': ^3.2.37
   '@vue/runtime-dom': ^3.2.37
@@ -29,7 +29,7 @@ dependencies:
 
 devDependencies:
   '@types/node': 17.0.42
-  '@volar/vue-language-service': 1.1.4
+  '@volar/vue-language-service': 1.1.4-patch.1
   '@vue/reactivity': 3.2.37
   '@vue/runtime-core': 3.2.37
   '@vue/runtime-dom': 3.2.37
@@ -169,7 +169,7 @@ packages:
       pug-parser: 6.0.0
       vscode-html-languageservice: 5.0.4
       vscode-languageserver-textdocument: 1.0.8
-      vscode-languageserver-types: 3.17.2
+      vscode-languageserver-types: 3.17.3
     dev: true
 
   /@volar-plugins/typescript-twoslash-queries/2.0.0-alpha.9_rtyf4yq5jwmosu7hc4xas6edgm:
@@ -252,8 +252,8 @@ packages:
       vue-template-compiler: 2.7.14
     dev: true
 
-  /@volar/vue-language-service/1.1.4:
-    resolution: {integrity: sha512-Elt7CZWyOmU0g9xYxEIPRGK3pYJZWO/OZ/MFzzPi1xL9RLdTNd/jiXvlArevrh76MIG4nPA9oHauwVGsUbdkpw==}
+  /@volar/vue-language-service/1.1.4-patch.1:
+    resolution: {integrity: sha512-TzAFqNXtgsWzePDZD8BOqC6Er/URduj53GdK31qnbWfbg4Z8nnTy1ZbdZvD5dlj0z4GwZgamnuztpSbH2AOjug==}
     dependencies:
       '@volar-plugins/css': 2.0.0-alpha.9_rtyf4yq5jwmosu7hc4xas6edgm
       '@volar-plugins/emmet': 2.0.0-alpha.9_rtyf4yq5jwmosu7hc4xas6edgm
@@ -987,7 +987,7 @@ packages:
     dependencies:
       '@vscode/l10n': 0.0.11
       vscode-languageserver-textdocument: 1.0.8
-      vscode-languageserver-types: 3.17.2
+      vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
     dev: true
 
