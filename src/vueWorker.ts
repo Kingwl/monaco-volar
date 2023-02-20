@@ -7,14 +7,7 @@ export interface ICreateData {
   extraLibs?: Record<string, string>;
 }
 
-type LSType = ReturnType<typeof getLanguageServiceAndDocumentsService>["ls"];
-
-type TailArgs<T extends (...args: any[]) => void> = T extends (
-  a: any,
-  ...args: infer Args
-) => void
-  ? Args
-  : never;
+type LSType = ReturnType<typeof getLanguageServiceAndDocumentsService>;
 
 type Args<T extends (...args: any[]) => void> = T extends (
   ...args: infer A
@@ -28,106 +21,58 @@ export class VueWorker {
 
   private _ls: LSType;
   private _extraLibs: Record<string, string>;
-  private _modelDocuments = new WeakMap<
-    worker.IMirrorModel,
-    vscode.TextDocument
-  >();
 
   constructor(ctx: worker.IWorkerContext, createData: ICreateData) {
     this._ctx = ctx;
     this._languageId = createData.languageId;
     this._extraLibs = createData.extraLibs ?? {};
 
-    const { ls } = getLanguageServiceAndDocumentsService(
+    this._ls = getLanguageServiceAndDocumentsService(
       () => this._ctx.getMirrorModels(),
       () => this._extraLibs
     );
-    this._ls = ls;
   }
 
   updateExtraLibs(extraLibs: Record<string, string>) {
     this._extraLibs = extraLibs;
   }
 
-  private runWithDocument<T>(
-    uri: string,
-    callback: (doc: vscode.TextDocument) => T
-  ) {
-    const model = this._ctx.getMirrorModels().find((x) => x.uri);
-    if (model) {
-      const document = this.getModelDocument(model);
-      return callback(document);
-    }
-  }
-
-  async doDSAutoInsert(uri: string, ...args: TailArgs<LSType["doAutoInsert"]>) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.doAutoInsert(document.uri, ...args);
-    });
+  async doDSAutoInsert(...args: Args<LSType["doAutoInsert"]>) {
+    return await this._ls.doAutoInsert(...args);
   }
 
   async doLSAutoInsert(...args: Args<LSType["doAutoInsert"]>) {
     return await this._ls.doAutoInsert(...args);
   }
 
-  async getFoldingRanges(
-    uri: string,
-    ...args: TailArgs<LSType["getFoldingRanges"]>
-  ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.getFoldingRanges(document.uri, ...args);
-    });
+  async getFoldingRanges(...args: Args<LSType["getFoldingRanges"]>) {
+    return await this._ls.getFoldingRanges(...args);
   }
 
-  async getColorPresentations(
-    uri: string,
-    ...args: TailArgs<LSType["getColorPresentations"]>
-  ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.getColorPresentations(document.uri, ...args);
-    });
+  async getColorPresentations(...args: Args<LSType["getColorPresentations"]>) {
+    return await this._ls.getColorPresentations(...args);
   }
 
-  async getSelectionRanges(
-    uri: string,
-    ...args: TailArgs<LSType["getSelectionRanges"]>
-  ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.getSelectionRanges(document.uri, ...args);
-    });
+  async getSelectionRanges(...args: Args<LSType["getSelectionRanges"]>) {
+    return await this._ls.getSelectionRanges(...args);
   }
 
-  async findDocumentColors(
-    uri: string,
-    ...args: TailArgs<LSType["findDocumentColors"]>
-  ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.findDocumentColors(document.uri, ...args);
-    });
+  async findDocumentColors(...args: Args<LSType["findDocumentColors"]>) {
+    return await this._ls.findDocumentColors(...args);
   }
 
-  async findDocumentSymbols(
-    uri: string,
-    ...args: TailArgs<LSType["findDocumentSymbols"]>
-  ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.findDocumentSymbols(document.uri, ...args);
-    });
+  async findDocumentSymbols(...args: Args<LSType["findDocumentSymbols"]>) {
+    return await this._ls.findDocumentSymbols(...args);
   }
 
   async findLinkedEditingRanges(
-    uri: string,
-    ...args: TailArgs<LSType["findLinkedEditingRanges"]>
+    ...args: Args<LSType["findLinkedEditingRanges"]>
   ) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.findLinkedEditingRanges(document.uri, ...args);
-    });
+    return await this._ls.findLinkedEditingRanges(...args);
   }
 
-  async format(uri: string, ...args: TailArgs<LSType["format"]>) {
-    return this.runWithDocument(uri, async (document) => {
-      return await this._ls.format(document.uri, ...args);
-    });
+  async format(...args: Args<LSType["format"]>) {
+    return await this._ls.format(...args);
   }
 
   async doCodeActions(...args: Args<LSType["doCodeActions"]>) {
@@ -155,8 +100,7 @@ export class VueWorker {
   }
 
   async doHover(...args: Args<LSType["doHover"]>) {
-    const result = await this._ls.doHover(...args);
-    return result;
+    return await this._ls.doHover(...args);
   }
 
   async doRename(...args: Args<LSType["doRename"]>) {
@@ -219,19 +163,5 @@ export class VueWorker {
 
   async prepareRename(...args: Args<LSType["prepareRename"]>) {
     return await this._ls.prepareRename(...args);
-  }
-
-  getModelDocument(model: worker.IMirrorModel) {
-    let document = this._modelDocuments.get(model);
-    if (!document || document.version !== model.version) {
-      document = vscode.TextDocument.create(
-        model.uri.toString(),
-        this._languageId,
-        model.version,
-        model.getValue()
-      );
-      this._modelDocuments.set(model, document);
-    }
-    return document;
   }
 }

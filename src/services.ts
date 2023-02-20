@@ -3,19 +3,14 @@ import * as ts from "typescript/lib/tsserverlibrary";
 import {
   createLanguageService,
   type VueLanguageServiceHost,
-  type ConfigurationHost,
 } from "@volar/vue-language-service";
 import path from "typesafe-path";
 import { URI } from "vscode-uri";
 
-interface LsAndDs {
-  ls: ReturnType<typeof createLanguageService>;
-}
-
 export function getLanguageServiceAndDocumentsService(
   getModels: () => worker.IMirrorModel[],
   getExtraLibs: () => Record<path.PosixPath, string>
-): LsAndDs {
+): ReturnType<typeof createLanguageService> {
   const scriptSnapshots = new Map<string, ts.IScriptSnapshot>();
 
   const findInModels = (fileName: path.PosixPath) => {
@@ -151,27 +146,9 @@ export function getLanguageServiceAndDocumentsService(
   // @ts-expect-error
   ts.setSys(sys);
 
-  const configurationHost: ConfigurationHost = {
-    getConfiguration<T>(seation: string): T {
-      // disabled because it these required for doExecuteCommand implementation
-      if (
-        seation === "volar.codeLens.pugTools" ||
-        seation === "volar.codeLens.scriptSetupTools"
-      ) {
-        return false as any;
-      }
-      return undefined as any;
-    },
-    onDidChangeConfiguration() {},
-  };
-  const ls = createLanguageService(host, {
+  return createLanguageService(host, {
     rootUri: URI.file("/"),
-    configurationHost,
   });
-
-  return {
-    ls,
-  };
 }
 
 function keysOf<T extends Object>(arr: T) {
