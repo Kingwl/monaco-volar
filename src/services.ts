@@ -149,9 +149,6 @@ export function getLanguageServiceAndDocumentsService(
 
   return createLanguageService(host, createConfig({}, ts, {}, {}), {
     rootUri: URI.file("/"),
-    documentContext: {
-      resolveReference: (ref, base) => undefined,
-    },
   });
 }
 
