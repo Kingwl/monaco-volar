@@ -330,7 +330,9 @@ export function asDocumentSymbol(
     tags: symbol.tags?.map(asSymbolTag) ?? [],
     range: asRange(symbol.range),
     selectionRange: asRange(symbol.selectionRange),
-    children: symbol.children ? symbol.children.map(asDocumentSymbol) : undefined,
+    children: symbol.children
+      ? symbol.children.map(asDocumentSymbol)
+      : undefined,
   };
 }
 
