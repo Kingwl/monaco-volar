@@ -7,7 +7,7 @@ export default defineConfig({
     include: [
       "path-browserify",
       "@volar/vue-language-service",
-      "monaco-editor-core",
+      "monaco-editor",
     ],
   },
   resolve: {

@@ -1,4 +1,4 @@
-import { Uri, languages } from "monaco-editor-core";
+import { Uri, languages } from "monaco-editor";
 import { getOrCreateModel } from "./utils";
 import * as path from "typesafe-path";
 
@@ -18,12 +18,12 @@ export function prepareVirtualFiles() {
   const libDtsUrl = Uri.parse("file:///lib.d.ts");
   const libPromiseUrl = Uri.parse("file:///lib.es2015.promise.d.ts");
 
-  const libEs5Model = getOrCreateModel(libEs5Url, undefined, libEs5Content);
-  const libDomModel = getOrCreateModel(libDomUrl, undefined, libDomContent);
-  const libDtsModel = getOrCreateModel(libDtsUrl, undefined, libDtsContent);
+  const libEs5Model = getOrCreateModel(libEs5Url, "vue", libEs5Content);
+  const libDomModel = getOrCreateModel(libDomUrl, "vue", libDomContent);
+  const libDtsModel = getOrCreateModel(libDtsUrl, "vue", libDtsContent);
   const libPromiseModel = getOrCreateModel(
     libPromiseUrl,
-    undefined,
+    "vue",
     libPromiseContent
   );
 
@@ -41,25 +41,25 @@ export function prepareVirtualFiles() {
     "file:///node_modules/%40vue/reactivity/index.d.ts"
   );
 
-  const vueModel = getOrCreateModel(vueUrl, undefined, vueContent);
+  const vueModel = getOrCreateModel(vueUrl, "vue", vueContent);
   const vueRuntimeDomModel = getOrCreateModel(
     vueRuntimeDomUrl,
-    undefined,
+    "vue",
     vueRuntimeDomContent
   );
   const vueRuntimeCoreModel = getOrCreateModel(
     vueRuntimeCoreUrl,
-    undefined,
+    "vue",
     vueRuntimeCoreContent
   );
   const vueSharedModel = getOrCreateModel(
     vueSharedUrl,
-    undefined,
+    "vue",
     vueSharedContent
   );
   const vueReactivityModel = getOrCreateModel(
     vueReactivityUrl,
-    undefined,
+    "vue",
     vueReactivityContent
   );
 

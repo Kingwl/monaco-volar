@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor-core';
+import * as monaco from 'monaco-editor';
 import { wireTmGrammars } from 'monaco-editor-textmate';
 import { Registry, type IGrammarDefinition } from 'monaco-textmate';
 

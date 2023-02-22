@@ -1,4 +1,4 @@
-import type { worker } from "monaco-editor-core";
+import type { worker } from "monaco-editor";
 import { getLanguageServiceAndDocumentsService } from "./services";
 import * as vscode from "vscode-languageserver-protocol";
 

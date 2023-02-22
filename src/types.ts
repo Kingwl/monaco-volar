@@ -1,4 +1,4 @@
-import type { Uri, languages } from "monaco-editor-core";
+import type { Uri, languages } from "monaco-editor";
 
 export interface WorkerAccessor<T> {
   (...more: Uri[]): Promise<T>;

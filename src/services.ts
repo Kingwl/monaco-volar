@@ -1,4 +1,4 @@
-import type { worker } from "monaco-editor-core";
+import type { worker } from "monaco-editor";
 import * as ts from "typescript/lib/tsserverlibrary";
 import {
   createConfig,

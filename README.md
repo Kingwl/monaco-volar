@@ -7,11 +7,11 @@
 `Monaco-volar` has external dependency Onigasm (to highlight code).
 
 ```console
-pnpm add monaco-volar monaco-editor-core onigasm
+pnpm add monaco-volar monaco-editor onigasm
 
 # or
 
-yarn add monaco-volar monaco-editor-core onigasm
+yarn add monaco-volar monaco-editor onigasm
 
 ```
 
@@ -22,7 +22,7 @@ yarn add monaco-volar monaco-editor-core onigasm
 Import `monaco-volar` when you are using monaco. It will register vue as a language automatic.
 
 ```ts
-import 'monaco-editor-core'
+import 'monaco-editor'
 import 'monaco-volar'
 ```
 
@@ -50,7 +50,7 @@ loadOnigasm()
 Now we can apply grammars into monaco editor instance.
 
 ```ts
-import { editor } from "monaco-editor-core";
+import { editor } from "monaco-editor";
 import { loadGrammars, loadTheme } from "monaco-volar";
 
 const theme = loadTheme()
@@ -70,7 +70,7 @@ loadGrammars(editorInstance);
 We need to let monaco know where and how to load out worker when using Vue.
 
 ```ts
-import editorWorker from "monaco-editor-core/esm/vs/editor/editor.worker?worker";
+import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import vueWorker from "monaco-volar/vue.worker?worker";
 
 function loadMonacoEnv() {

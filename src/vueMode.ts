@@ -13,7 +13,7 @@ import {
   languages,
   Range,
   type IDisposable,
-} from "monaco-editor-core";
+} from "monaco-editor";
 import { createDiagnosticsAdapter } from "./diagnostics";
 import { asDisposable, disposeAll } from "./utils";
 import { IVueAdaptor, WorkerAccessor } from "./types";

@@ -1,4 +1,4 @@
-import { editor, IDisposable } from "monaco-editor-core";
+import { editor, IDisposable } from "monaco-editor";
 import type { LanguageServiceDefaults } from "./monaco.contribution";
 import { WorkerAccessor } from "./types";
 import type { VueWorker } from "./vueWorker";

@@ -1,1 +1,1 @@
-export const externals = ["monaco-editor-core", "onigasm"];
+export const externals = ["monaco-editor", "onigasm"];

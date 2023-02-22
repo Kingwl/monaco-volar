@@ -1,4 +1,4 @@
-import { editor } from 'monaco-editor-core'
+import { editor } from 'monaco-editor'
 import { theme } from './converted'
 
 export async function loadTheme() {
