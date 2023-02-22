@@ -321,17 +321,16 @@ export function asWorkspaceEdit(
 }
 
 export function asDocumentSymbol(
-  symbol: vscode.SymbolInformation
+  symbol: vscode.DocumentSymbol
 ): languages.DocumentSymbol {
   return {
     name: symbol.name,
     detail: "",
     kind: asSymbolKind(symbol.kind),
     tags: symbol.tags?.map(asSymbolTag) ?? [],
-    containerName: symbol.containerName,
-    range: asRange(symbol.location.range),
-    selectionRange: asRange(symbol.location.range),
-    children: [],
+    range: asRange(symbol.range),
+    selectionRange: asRange(symbol.selectionRange),
+    children: symbol.children ? symbol.children.map(asDocumentSymbol) : undefined,
   };
 }
 
