@@ -13,7 +13,6 @@ export function loadOnigasm() {
 }
 
 export function setupMonacoEnv(takeoverMode = false) {
-
   let initialized = false;
 
   languages.register({ id: "vue", extensions: [".vue"] });
@@ -52,9 +51,16 @@ export function setupMonacoEnv(takeoverMode = false) {
       host: new MyWorkerContextHost(),
     });
     const languageId = takeoverMode
-      ? ["vue", "javascript", "typescript", "javascriptreact", "typescriptreact", "json"]
+      ? [
+          "vue",
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact",
+          "json",
+        ]
       : ["vue"];
-    volar.editor.activateMarkers(worker, languageId, 'vue', editor);
-    await volar.languages.registerProvides(worker, languageId, languages)
+    volar.editor.activateMarkers(worker, languageId, "vue", editor);
+    await volar.languages.registerProvides(worker, languageId, languages);
   }
 }
