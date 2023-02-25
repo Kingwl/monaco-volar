@@ -57,6 +57,11 @@
     "onigasm": "^2.2.5",
     "vscode-uri": "^3.0.7"
   },
+  "pnpm": {
+    "overrides": {
+      "@volar/vue-language-core": "1.2.0-patch.2"
+    }
+  },
   "scripts": {
     "build:lib": "vite build -c ./scripts/vite.lib.config.ts",
     "build:worker": "vite build -c ./scripts/vite.worker.config.ts",

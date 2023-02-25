@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  '@volar/vue-language-core': 1.2.0-patch.2
+
 specifiers:
   '@types/node': ^18.14.1
   '@volar/monaco': 1.3.0-alpha.0
@@ -463,8 +466,8 @@ packages:
       semver: 7.3.8
     dev: true
 
-  /@volar/vue-language-core/1.2.0:
-    resolution: {integrity: sha512-w7yEiaITh2WzKe6u8ZdeLKCUz43wdmY/OqAmsB/PGDvvhTcVhCJ6f0W/RprZL1IhqH8wALoWiwEh/Wer7ZviMQ==}
+  /@volar/vue-language-core/1.2.0-patch.2:
+    resolution: {integrity: sha512-Vkfki166pbYpd7lG/FblbkNELbQmz3NzIFbQVcd7WUIvkse2dXCHzhx7RQnlkchQ+dNbCfF30VkVkxHoZy4ZCA==}
     dependencies:
       '@volar/language-core': 1.3.0-alpha.0
       '@volar/source-map': 1.3.0-alpha.0
@@ -492,7 +495,7 @@ packages:
       '@volar/language-service': 1.3.0-alpha.0
       '@volar/shared': 1.3.0-alpha.0
       '@volar/source-map': 1.3.0-alpha.0
-      '@volar/vue-language-core': 1.2.0
+      '@volar/vue-language-core': 1.2.0-patch.2
       '@vue/compiler-dom': 3.2.47
       '@vue/reactivity': 3.2.47
       '@vue/shared': 3.2.47
