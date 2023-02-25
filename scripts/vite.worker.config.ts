@@ -22,7 +22,7 @@ export default defineConfig({
       formats: ["es"],
       name: "vue.worker.js",
     },
-    sourcemap: true,
+    sourcemap: false,
     outDir: path.resolve(__dirname, "../dist/worker"),
     rollupOptions: {
       output: {
