@@ -1,5 +1,4 @@
 import { Uri, editor, IDisposable } from "monaco-editor-core";
-import * as path from "typesafe-path";
 
 export function debounce(fn: Function, n = 100) {
   let handle: any;
@@ -41,5 +40,5 @@ export function createDisposable(cb: () => void): IDisposable {
 }
 
 export function normalizePath(path: string) {
-  return path.replace(/\\/g, "/") as path.PosixPath;
+  return path.replace(/\\/g, "/");
 }
