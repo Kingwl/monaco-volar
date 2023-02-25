@@ -88,7 +88,7 @@ loadMonacoEnv()
 
 ```
 
-#### Prepare virtual files
+<!-- #### Prepare virtual files
 
 We have some pre-defined type declaration files to provide type check and more language features. 
 
@@ -96,7 +96,7 @@ We have some pre-defined type declaration files to provide type check and more l
 import { prepareVirtualFiles } from "monaco-volar";
 
 prepareVirtualFiles();
-```
+``` -->
 
 ### Create vue model
 
@@ -106,11 +106,10 @@ Now we can just create a model using vue language.
 const model = editor.createModel(code, 'vue', uri);
 ```
 
-
-## API
+<!-- ## API
 
 ## Add extra lib
 
 ```ts
 monaco.languages.vue.vueDefaults.addExtraLib(uri, code);
-```
+``` -->

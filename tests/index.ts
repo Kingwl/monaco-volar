@@ -1,16 +1,13 @@
-import { loadMonacoEnv, loadOnigasm } from "./env";
+import { setupMonacoEnv, loadOnigasm } from "./env";
 import { editor, Uri } from "monaco-editor-core";
-import { loadGrammars, loadTheme, prepareVirtualFiles } from "../src/index";
+import { loadGrammars, loadTheme } from "../src/index";
 import { getOrCreateModel } from "../src/utils";
 import data from "./Test.vue?raw";
 
 const afterReady = (theme: string) => {
-  const element = document.getElementById("app")!;
-
-  prepareVirtualFiles();
 
   const model = getOrCreateModel(Uri.parse("file:///demo.vue"), "vue", data);
-
+  const element = document.getElementById("app")!;
   const editorInstance = editor.create(element, {
     theme,
     model,
@@ -27,7 +24,7 @@ const afterReady = (theme: string) => {
   loadGrammars(editorInstance);
 };
 
-Promise.all([loadMonacoEnv(), loadOnigasm(), loadTheme()]).then(
+Promise.all([setupMonacoEnv(), loadOnigasm(), loadTheme()]).then(
   ([, , theme]) => {
     afterReady(theme);
   }

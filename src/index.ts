@@ -1,5 +1,4 @@
 import { editor } from "monaco-editor-core";
-import "./monaco.contribution";
 
 export const loadTheme = async () => {
   const themes = await import("./themes");
@@ -9,9 +8,4 @@ export const loadTheme = async () => {
 export const loadGrammars = async (editor: editor.IStandaloneCodeEditor) => {
   const grammars = await import("./grammars");
   return grammars.loadGrammars(editor);
-};
-
-export const prepareVirtualFiles = async () => {
-  const prepare = await import("./prepare");
-  return prepare.prepareVirtualFiles();
 };
