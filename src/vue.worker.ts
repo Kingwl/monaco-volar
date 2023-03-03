@@ -36,7 +36,7 @@ self.onmessage = () => {
           module: ts as any,
           compilerOptions,
         },
-        dtsHost: volarWorker.createDtsHost('https://unpkg.com/'),
+        dtsHost: volarWorker.createDtsHost("https://unpkg.com/"),
       });
     }
   );
