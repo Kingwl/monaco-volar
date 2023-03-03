@@ -2,12 +2,11 @@ import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import type * as monaco from "monaco-editor-core";
 import * as ts from "typescript";
 import { resolveConfig } from "@volar/vue-language-service";
-import type { MyWorkerContextHost } from "./host";
 import * as volarWorker from "@volar/monaco/worker";
 
 self.onmessage = () => {
   worker.initialize(
-    (ctx: monaco.worker.IWorkerContext<MyWorkerContextHost>) => {
+    (ctx: monaco.worker.IWorkerContext) => {
       const compilerOptions: ts.CompilerOptions = {
         ...ts.getDefaultCompilerOptions(),
         allowJs: true,

@@ -6,7 +6,6 @@ import onigasmWasm from "onigasm/lib/onigasm.wasm?url";
 import { LanguageService } from "@volar/vue-language-service";
 import { editor, languages } from "monaco-editor-core";
 import * as volar from "@volar/monaco";
-import { MyWorkerContextHost } from "../src/host";
 
 export function loadOnigasm() {
   return onigasm.loadWASM(onigasmWasm);
@@ -48,7 +47,6 @@ export function setupMonacoEnv(takeoverMode = false) {
       moduleId: "vs/language/vue/vueWorker",
       label: "vue",
       createData: {},
-      host: new MyWorkerContextHost(),
     });
     const languageId = takeoverMode
       ? [
