@@ -1,1 +1,6 @@
-export const externals = ["monaco-editor-core", "onigasm", "monaco-editor-textmate", "monaco-textmate"];
+export const externals = [
+  "monaco-editor-core",
+  "onigasm",
+  "monaco-editor-textmate",
+  "monaco-textmate",
+];
