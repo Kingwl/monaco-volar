@@ -35,12 +35,8 @@ self.onmessage = () => {
         typescript: {
           module: ts as any,
           compilerOptions,
-          autoFetchTypes: {
-            onFetchTypesFiles(files) {
-              return ctx.host.syncAutoTypesFetchFiles(files);
-            },
-          },
         },
+        dtsHost: volarWorker.createDtsHost('https://unpkg.com/'),
       });
     }
   );

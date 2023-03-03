@@ -60,7 +60,9 @@ export function setupMonacoEnv(takeoverMode = false) {
           "json",
         ]
       : ["vue"];
-    volar.editor.activateMarkers(worker, languageId, "vue", editor);
-    await volar.languages.registerProvides(worker, languageId, languages);
+    const getSyncUris = () => editor.getModels().map((model) => model.uri);
+    volar.editor.activateMarkers(worker, languageId, "vue", getSyncUris, editor);
+    volar.editor.activateAutoInsertion(worker, languageId, getSyncUris, editor);
+    await volar.languages.registerProvides(worker, languageId, getSyncUris, languages);
   }
 }
