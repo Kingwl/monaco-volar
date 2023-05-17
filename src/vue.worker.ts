@@ -1,8 +1,8 @@
 import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import type * as monaco from "monaco-editor-core";
 import * as ts from "typescript";
-import { resolveConfig } from "@volar/vue-language-service";
-import * as volarWorker from "@volar/monaco/worker";
+import { resolveConfig } from "@vue/language-service";
+import { createLanguageService, createDtsHost } from "@volar/monaco/worker";
 
 self.onmessage = () => {
   worker.initialize((ctx: monaco.worker.IWorkerContext) => {
@@ -14,27 +14,14 @@ self.onmessage = () => {
       moduleResolution: ts.ModuleResolutionKind.NodeJs,
     };
 
-    return volarWorker.createLanguageService({
+    return createLanguageService({
       workerContext: ctx,
-      config: resolveConfig(
-        {
-          plugins: {
-            /* volar.config.js plugins */
-          },
-        },
-        ts as any,
-        compilerOptions,
-        {
-          plugins: [
-            /* tsconfig vueCompilerOptions plugins */
-          ],
-        }
-      ),
+      config: resolveConfig({}, compilerOptions, undefined, ts as any),
       typescript: {
         module: ts as any,
         compilerOptions,
       },
-      dtsHost: volarWorker.createDtsHost("https://unpkg.com/"),
+      dtsHost: createDtsHost("https://unpkg.com/"),
     });
   });
 };
