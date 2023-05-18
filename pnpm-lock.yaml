@@ -16,11 +16,11 @@ devDependencies:
     specifier: ^18.14.1
     version: 18.14.1
   '@volar/monaco':
-    specifier: 1.6.5
-    version: 1.6.5
+    specifier: 1.6.7
+    version: 1.6.7(vscode-languageserver-protocol@3.17.3)
   '@vue/language-service':
-    specifier: 1.7.4
-    version: 1.7.4(typescript@4.9.5)
+    specifier: 1.7.6
+    version: 1.7.6(typescript@4.9.5)
   '@vue/reactivity':
     specifier: ^3.3.2
     version: 3.3.2
@@ -325,36 +325,39 @@ packages:
     resolution: {integrity: sha512-QH+37Qds3E0eDlReeboBxfHbX9omAcBCXEzswCu6jySP642jiM3cYSIkU/REqwhCUqXdonHFuBfJDiAJxMNhaQ==}
     dev: true
 
-  /@volar/language-core@1.6.5:
-    resolution: {integrity: sha512-8hyTSGEtH9RJ20XsokxP0EwAro4k4sB2NagaJ1egzNAa6/WVgfr4REu4d7z205Rtj7oYNc9RQN6kOy6tDxuoJg==}
+  /@volar/language-core@1.6.7:
+    resolution: {integrity: sha512-c6EvIDVkE2XwW6cvsjw0cfuynKihqtIHuDE4ToZW0vYKpnM3KpQuXe4NLOhwof6fSOKQF8ocNOb1LmLlWv2hSw==}
     dependencies:
-      '@volar/source-map': 1.6.5
+      '@volar/source-map': 1.6.7
     dev: true
 
-  /@volar/language-service@1.6.5:
-    resolution: {integrity: sha512-0HXcAIg0QoNmV07VUkvAe+NGVTK41JvxYfEj+yrjKjamBjYv30kJ0GWovx2n4cJAd0ix9kNaWl77fzTtB4bAaA==}
+  /@volar/language-service@1.6.7(vscode-languageserver-protocol@3.17.3):
+    resolution: {integrity: sha512-CVNIkEFSFYsqilPYC0UjcWiYfQQPCoSJZB3JFgh8W894gxJpvgz6ZXB75RJO5SXvzUajvwnf23Tq04gFwtkWfA==}
+    peerDependencies:
+      vscode-languageserver-protocol: '*'
+    peerDependenciesMeta:
+      vscode-languageserver-protocol:
+        optional: true
     dependencies:
-      '@volar/language-core': 1.6.5
-      '@volar/source-map': 1.6.5
+      '@volar/language-core': 1.6.7
+      '@volar/source-map': 1.6.7
       typescript-auto-import-cache: 0.2.1
-      vscode-html-languageservice: 5.0.4
-      vscode-json-languageservice: 5.3.1
       vscode-languageserver-protocol: 3.17.3
       vscode-languageserver-textdocument: 1.0.8
       vscode-uri: 3.0.7
     dev: true
 
-  /@volar/monaco@1.6.5:
-    resolution: {integrity: sha512-rg5empyb26Zi+ZlatmwOnsr6VlMrGzT+APal9YO8Hiawo9tHSybC00WgQRCiEF4mq5I/3j2QCG6QLODAlCzooQ==}
+  /@volar/monaco@1.6.7(vscode-languageserver-protocol@3.17.3):
+    resolution: {integrity: sha512-vMCgy0bOl/eWx5W4GDXdRklt0obk7F/F3/FRarMA6OU4Vt66YhfY82en8wmjV/sfKmoTG5iKTLrNM/YzhtNjlw==}
     dependencies:
-      '@volar/language-service': 1.6.5
-      monaco-editor-core: 0.36.0
-      vscode-languageserver-protocol: 3.17.3
+      '@volar/language-service': 1.6.7(vscode-languageserver-protocol@3.17.3)
       vscode-uri: 3.0.7
+    transitivePeerDependencies:
+      - vscode-languageserver-protocol
     dev: true
 
-  /@volar/source-map@1.6.5:
-    resolution: {integrity: sha512-/7GLbQHnn0YtC6/wnBYhX3SFMYFyBd7+jPHQq4a1pqwxmaImV5+iQcTToiQvy1OXIZImpafwZdRuSYBzeN076A==}
+  /@volar/source-map@1.6.7:
+    resolution: {integrity: sha512-TOvaS7dr4kVxKg2wAKOqo8Y0/ZKVzirmumsMeU83t8xAPc24x58cjE9xAlju5e/MWXH4ETTeJqftf8EbwGi1iw==}
     dependencies:
       muggle-string: 0.3.1
     dev: true
@@ -411,16 +414,16 @@ packages:
       '@vue/shared': 3.3.2
     dev: true
 
-  /@vue/language-core@1.7.4(typescript@4.9.5):
-    resolution: {integrity: sha512-UK3BwhSWi5/UIRri822o/3AF9Vle3U7GCfFvLWkUwDEo1JZWQbJXyU4AlSy8CwhoCuWp1g/ajOaphBRhNEMZ/w==}
+  /@vue/language-core@1.7.6(typescript@4.9.5):
+    resolution: {integrity: sha512-3YDIrR7wN406nCu4xO5exQLcEiLi+fBORJ6EERuSHdmNcVvE5SezLwapx0L+EB+/OqA7L8TR0QreVognxM3nUQ==}
     peerDependencies:
       typescript: '*'
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@volar/language-core': 1.6.5
-      '@volar/source-map': 1.6.5
+      '@volar/language-core': 1.6.7
+      '@volar/source-map': 1.6.7
       '@vue/compiler-dom': 3.3.2
       '@vue/reactivity': 3.3.2
       '@vue/shared': 3.3.2
@@ -430,21 +433,21 @@ packages:
       vue-template-compiler: 2.7.14
     dev: true
 
-  /@vue/language-service@1.7.4(typescript@4.9.5):
-    resolution: {integrity: sha512-uhcGlpH6cuoWP8T68CyV3NInDte74Pvbz2xAYZgszwwCyoyLzxnIwFd4UAYi1ABHqMdb+gCvj7/Qws+wq10+Tg==}
+  /@vue/language-service@1.7.6(typescript@4.9.5):
+    resolution: {integrity: sha512-Iuhxb5JVuJSVRHtoX+5NLZN8aGOxYrQqgYRgmpEHnji7dvvwz9esIOYEhxn4m5HGj6KLz8QjXNRnpVSerdMBnw==}
     dependencies:
-      '@volar/language-core': 1.6.5
-      '@volar/language-service': 1.6.5
-      '@volar/source-map': 1.6.5
+      '@volar/language-core': 1.6.7
+      '@volar/language-service': 1.6.7(vscode-languageserver-protocol@3.17.3)
+      '@volar/source-map': 1.6.7
       '@vue/compiler-dom': 3.3.2
-      '@vue/language-core': 1.7.4(typescript@4.9.5)
+      '@vue/language-core': 1.7.6(typescript@4.9.5)
       '@vue/reactivity': 3.3.2
       '@vue/shared': 3.3.2
       volar-service-css: 0.0.3
       volar-service-emmet: 0.0.3
       volar-service-html: 0.0.3
       volar-service-json: 0.0.3
-      volar-service-pug: 0.0.3(@volar/language-service@1.6.5)(@volar/source-map@1.6.5)
+      volar-service-pug: 0.0.3(@volar/language-service@1.6.7)(@volar/source-map@1.6.7)
       volar-service-pug-beautify: 0.0.3
       volar-service-typescript: 0.0.3
       volar-service-typescript-twoslash-queries: 0.0.3
@@ -892,10 +895,6 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /monaco-editor-core@0.36.0:
-    resolution: {integrity: sha512-d0559W7eAJUAIUYZxVNwvjRTnBux1UXnT5FP94Fmq2w6aNG4/xPQkis5E9+AoPF5hVoNXkQMP5aYnPyogoOR/w==}
-    dev: true
-
   /monaco-editor-core@0.38.0:
     resolution: {integrity: sha512-xMYhffdnz+sKcA9OTxsSh4s1Wul3WocjIKZqX47ULgC5m8Fprwn6CrD+CQG663xQd3pjjoh9xEggy/wN7iqcWA==}
     dev: false
@@ -1116,14 +1115,14 @@ packages:
       '@johnsoncodehk/pug-beautify': 0.2.2
     dev: true
 
-  /volar-service-pug@0.0.3(@volar/language-service@1.6.5)(@volar/source-map@1.6.5):
+  /volar-service-pug@0.0.3(@volar/language-service@1.6.7)(@volar/source-map@1.6.7):
     resolution: {integrity: sha512-HHW5JfdFdI+Zx0VFU+gJtJPrEqUo09YxqUDQYlj/A38PblRpFW2BMNKaGlmwOP96gDQOzBJ3tYYF6crTS12AMA==}
     peerDependencies:
       '@volar/language-service': '*'
       '@volar/source-map': '*'
     dependencies:
-      '@volar/language-service': 1.6.5
-      '@volar/source-map': 1.6.5
+      '@volar/language-service': 1.6.7(vscode-languageserver-protocol@3.17.3)
+      '@volar/source-map': 1.6.7
       muggle-string: 0.3.1
       pug-lexer: 5.0.1
       pug-parser: 6.0.0

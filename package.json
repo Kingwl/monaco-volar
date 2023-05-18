@@ -30,8 +30,8 @@
   "homepage": "https://github.com/Kingwl/monaco-volar#readme",
   "devDependencies": {
     "@types/node": "^18.14.1",
-    "@volar/monaco": "1.6.5",
-    "@vue/language-service": "1.7.4",
+    "@volar/monaco": "1.6.7",
+    "@vue/language-service": "1.7.6",
     "@vue/reactivity": "^3.3.2",
     "@vue/runtime-core": "^3.3.2",
     "@vue/runtime-dom": "^3.3.2",
