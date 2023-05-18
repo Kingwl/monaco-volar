@@ -30,14 +30,14 @@
   "homepage": "https://github.com/Kingwl/monaco-volar#readme",
   "devDependencies": {
     "@types/node": "^18.14.1",
-    "@volar/monaco": "1.6.3",
-    "@vue/language-service": "1.7.3",
+    "@volar/monaco": "1.6.5",
+    "@vue/language-service": "1.7.4",
     "@vue/reactivity": "^3.3.2",
     "@vue/runtime-core": "^3.3.2",
     "@vue/runtime-dom": "^3.3.2",
     "@vue/shared": "^3.3.2",
     "esbuild": "^0.14.43",
-    "monaco-editor-core": "^0.36.0",
+    "monaco-editor-core": "^0.38.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
     "onigasm": "^2.2.5",
@@ -49,11 +49,11 @@
     "vue": "^3.3.2"
   },
   "peerDependencies": {
-    "monaco-editor-core": "^0.36.0",
+    "monaco-editor-core": "^0.38.0",
     "onigasm": "^2.2.5"
   },
   "dependencies": {
-    "monaco-editor-core": "^0.36.0",
+    "monaco-editor-core": "^0.38.0",
     "onigasm": "^2.2.5",
     "vscode-uri": "^3.0.7"
   },

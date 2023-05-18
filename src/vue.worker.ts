@@ -2,7 +2,7 @@ import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import type * as monaco from "monaco-editor-core";
 import * as ts from "typescript";
 import { resolveConfig } from "@vue/language-service";
-import { createLanguageService, createDtsHost } from "@volar/monaco/worker";
+import { createLanguageService, createJsDelivrDtsHost } from "@volar/monaco/worker";
 
 self.onmessage = () => {
   worker.initialize((ctx: monaco.worker.IWorkerContext) => {
@@ -16,12 +16,12 @@ self.onmessage = () => {
 
     return createLanguageService({
       workerContext: ctx,
-      config: resolveConfig({}, compilerOptions, undefined, ts as any),
+      config: resolveConfig({}, compilerOptions as any, undefined, undefined, ts as any),
       typescript: {
         module: ts as any,
-        compilerOptions,
+        compilerOptions: compilerOptions as any,
       },
-      dtsHost: createDtsHost("https://unpkg.com/"),
+      dtsHost: createJsDelivrDtsHost(),
     });
   });
 };

@@ -77,5 +77,5 @@ export async function loadGrammars(editor: monaco.editor.IStandaloneCodeEditor) 
     });
   }
 
-  await wireTmGrammars(monaco, registry, grammars, editor);
+  await wireTmGrammars(monaco as any, registry, grammars, editor as any);
 }
