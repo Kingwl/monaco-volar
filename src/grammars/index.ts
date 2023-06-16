@@ -13,22 +13,22 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
         format: 'json',
         content: await import('./TypeScript.tmLanguage.json'),
       };
-    case 'source.tsx':
-      return {
-        format: 'json',
-        content: await import('./TypeScriptReact.tmLanguage.json'),
-      };
+    // case 'source.tsx':
+    //   return {
+    //     format: 'json',
+    //     content: await import('./TypeScriptReact.tmLanguage.json'),
+    //   };
     case 'source.js':
       return {
         format: 'json',
         content: await import('./JavaScript.tmLanguage.json'),
       };
-    case 'source.js.jsx':
-    case 'source.jsx':
-      return {
-        format: 'json',
-        content: await import('./JavaScriptReact.tmLanguage.json'),
-      };
+    // case 'source.js.jsx':
+    // case 'source.jsx':
+    //   return {
+    //     format: 'json',
+    //     content: await import('./JavaScriptReact.tmLanguage.json'),
+    //   };
     case 'text.html.basic':
       return {
         format: 'json',
@@ -39,16 +39,16 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
         format: 'json',
         content: await import('./css.tmLanguage.json'),
       };
-    case 'source.stylus':
-      return {
-        format: 'json',
-        content: await import('./stylus.tmLanguage.json'),
-      };
-    case 'source.markdown':
-      return {
-        format: 'json',
-        content: await import('./markdown.tmLanguage.json'),
-      };
+    // case 'source.stylus':
+    //   return {
+    //     format: 'json',
+    //     content: await import('./stylus.tmLanguage.json'),
+    //   };
+    // case 'source.markdown':
+    //   return {
+    //     format: 'json',
+    //     content: await import('./markdown.tmLanguage.json'),
+    //   };
     default:
       return {
         format: 'json',
@@ -69,6 +69,10 @@ export async function loadGrammars(monaco: typeof import('monaco-editor-core'), 
   });
   const grammars = new Map();
   grammars.set('vue', 'source.vue');
+  grammars.set("javascript", "source.js");
+  grammars.set("typescript", "source.ts");
+  grammars.set("css", "source.css");
+  grammars.set("html", "text.html.basic");
 
   for (const lang of grammars.keys()) {
     monaco.languages.register({
