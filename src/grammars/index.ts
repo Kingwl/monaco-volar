@@ -1,4 +1,3 @@
-import * as monaco from 'monaco-editor-core';
 import { wireTmGrammars } from 'monaco-editor-textmate';
 import { Registry, type IGrammarDefinition } from 'monaco-textmate';
 
@@ -61,7 +60,7 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
   }
 }
 
-export async function loadGrammars(editor: monaco.editor.IStandaloneCodeEditor) {
+export async function loadGrammars(monaco: typeof import('monaco-editor-core'), editor: import('monaco-editor-core').editor.IStandaloneCodeEditor) {
   const registry = new Registry({
     getGrammarDefinition: async (scopeName) => {
       const dispatch = await dispatchGrammars(scopeName);

@@ -1,8 +1,12 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
-  monaco-editor-core:
-    specifier: ^0.38.0
+  monaco-editor:
+    specifier: '*'
     version: 0.38.0
   onigasm:
     specifier: ^2.2.5
@@ -36,6 +40,9 @@ devDependencies:
   esbuild:
     specifier: ^0.14.43
     version: 0.14.54
+  monaco-editor-core:
+    specifier: ^0.38.0
+    version: 0.38.0
   monaco-editor-textmate:
     specifier: ^4.0.0
     version: 4.0.0(monaco-editor@0.38.0)(monaco-textmate@3.0.1)
@@ -897,7 +904,7 @@ packages:
 
   /monaco-editor-core@0.38.0:
     resolution: {integrity: sha512-xMYhffdnz+sKcA9OTxsSh4s1Wul3WocjIKZqX47ULgC5m8Fprwn6CrD+CQG663xQd3pjjoh9xEggy/wN7iqcWA==}
-    dev: false
+    dev: true
 
   /monaco-editor-textmate@4.0.0(monaco-editor@0.38.0)(monaco-textmate@3.0.1):
     resolution: {integrity: sha512-Clwup5LJzVfwURQrS+odSEC5/hZBEG36pQnvBKt4OtBndF8r2xLeXUZcK/AqEBK2u0Npy7frFp9hG7m66Ol9hA==}
@@ -911,7 +918,6 @@ packages:
 
   /monaco-editor@0.38.0:
     resolution: {integrity: sha512-11Fkh6yzEmwx7O0YoLxeae0qEGFwmyPRlVxpg7oF9czOOCB/iCjdJrG5I67da5WiXK3YJCxoz9TJFE8Tfq/v9A==}
-    dev: true
 
   /monaco-textmate@3.0.1(onigasm@2.2.5):
     resolution: {integrity: sha512-ZxxY3OsqUczYP1sGqo97tu+CJmMBwuSW+dL0WEBdDhOZ5G1zntw72hvBc68ZQAirosWvbDKgN1dL5k173QtFww==}

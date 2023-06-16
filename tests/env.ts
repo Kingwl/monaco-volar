@@ -3,7 +3,7 @@ import vueWorker from "../src/vue.worker?worker";
 import * as onigasm from "onigasm";
 import onigasmWasm from "onigasm/lib/onigasm.wasm?url";
 
-import { LanguageService } from "@volar/vue-language-service";
+import type { LanguageService } from "@vue/language-service";
 import { editor, languages } from "monaco-editor-core";
 import * as volar from "@volar/monaco";
 

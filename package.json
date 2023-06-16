@@ -28,6 +28,10 @@
     "url": "https://github.com/Kingwl/monaco-volar/issues"
   },
   "homepage": "https://github.com/Kingwl/monaco-volar#readme",
+  "dependencies": {
+    "onigasm": "^2.2.5",
+    "vscode-uri": "^3.0.7"
+  },
   "devDependencies": {
     "@types/node": "^18.14.1",
     "@volar/monaco": "1.6.7",
@@ -40,7 +44,6 @@
     "monaco-editor-core": "^0.38.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
-    "onigasm": "^2.2.5",
     "path-browserify": "^1.0.1",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5",
@@ -49,13 +52,16 @@
     "vue": "^3.3.2"
   },
   "peerDependencies": {
-    "monaco-editor-core": "^0.38.0",
-    "onigasm": "^2.2.5"
+    "monaco-editor": "*",
+    "monaco-editor-core": "*"
   },
-  "dependencies": {
-    "monaco-editor-core": "^0.38.0",
-    "onigasm": "^2.2.5",
-    "vscode-uri": "^3.0.7"
+  "peerDependenciesMeta": {
+    "monaco-editor": {
+      "optional": true
+    },
+    "monaco-editor-core": {
+      "optional": true
+    }
   },
   "scripts": {
     "build:lib": "vite build -c ./scripts/vite.lib.config.ts",
