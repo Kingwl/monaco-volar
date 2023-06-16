@@ -41,7 +41,7 @@
     "@vue/runtime-dom": "^3.3.2",
     "@vue/shared": "^3.3.2",
     "esbuild": "^0.14.43",
-    "monaco-editor-core": "^0.38.0",
+    "monaco-editor": "^0.38.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
     "path-browserify": "^1.0.1",
