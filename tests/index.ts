@@ -5,7 +5,11 @@ import { getOrCreateModel } from "../src/utils";
 import data from "./Test.vue?raw";
 
 const afterReady = (theme: string) => {
-  const model = getOrCreateModel(monaco.Uri.parse("file:///demo.vue"), "vue", data);
+  const model = getOrCreateModel(
+    monaco.Uri.parse("file:///demo.vue"),
+    "vue",
+    data
+  );
   const element = document.getElementById("app")!;
   const editorInstance = monaco.editor.create(element, {
     theme,
