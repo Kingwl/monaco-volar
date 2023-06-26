@@ -845,14 +845,7 @@ export const lightTheme: monaco.editor.IStandaloneThemeData = {
       "textLink.foreground": "#0366d6",
       "textPreformat.foreground": "#586069",
       "textSeparator.foreground": "#d1d5da",
-      "titleBar.activeBackground": "#ffffff",
-      "titleBar.activeForeground": "#2f363d",
-      "titleBar.border": "#e1e4e8",
-      "titleBar.inactiveBackground": "#f6f8fa",
-      "titleBar.inactiveForeground": "#6a737d",
-      "tree.indentGuidesStroke": "#e1e4e8",
-      "welcomePage.buttonBackground": "#f6f8fa",
-      "welcomePage.buttonHoverBackground": "#e1e4e8"
+
   },
   "rules": [
     { "foreground": "#6A737D", "token": "comment" },
