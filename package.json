@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "@types/node": "^18.14.1",
-    "@volar/monaco": "1.7.8",
-    "@volar/typescript": "1.7.8",
-    "@vue/language-service": "1.8.1",
+    "@volar/monaco": "1.7.9",
+    "@volar/typescript": "1.7.9",
+    "@vue/language-service": "1.8.2",
     "@vue/reactivity": "^3.3.2",
     "@vue/runtime-core": "^3.3.2",
     "@vue/runtime-dom": "^3.3.2",
