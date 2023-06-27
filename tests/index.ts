@@ -29,6 +29,6 @@ const afterReady = (theme: string) => {
 
 Promise.all([setupMonacoEnv(), loadOnigasm(), loadTheme(monaco.editor)]).then(
   ([, , theme]) => {
-    afterReady(theme);
+    afterReady(theme.dark);
   }
 );
