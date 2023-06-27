@@ -4,11 +4,7 @@ import * as path from "path";
 export default defineConfig({
   base: "/monaco-volar/",
   optimizeDeps: {
-    include: [
-      "path-browserify",
-      "@vue/language-service",
-      "monaco-editor-core",
-    ],
+    include: ["path-browserify", "@vue/language-service", "monaco-editor-core"],
   },
   resolve: {
     alias: {
