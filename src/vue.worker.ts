@@ -1,4 +1,4 @@
-import * as worker from "monaco-editor/esm/vs/editor/editor.worker";
+import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import type * as monaco from "monaco-editor-core";
 import * as ts from "typescript";
 import { resolveConfig } from "@vue/language-service";

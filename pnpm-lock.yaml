@@ -5,15 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  monaco-editor-core:
-    specifier: '*'
-    version: 0.38.0
   onigasm:
     specifier: ^2.2.5
     version: 2.2.5
-  vscode-uri:
-    specifier: ^3.0.7
-    version: 3.0.7
 
 devDependencies:
   '@types/node':
@@ -28,22 +22,10 @@ devDependencies:
   '@vue/language-service':
     specifier: 1.8.2
     version: 1.8.2(typescript@4.9.5)
-  '@vue/reactivity':
-    specifier: ^3.3.2
-    version: 3.3.2
-  '@vue/runtime-core':
-    specifier: ^3.3.2
-    version: 3.3.2
-  '@vue/runtime-dom':
-    specifier: ^3.3.2
-    version: 3.3.2
-  '@vue/shared':
-    specifier: ^3.3.2
-    version: 3.3.2
   esbuild:
     specifier: ^0.14.43
     version: 0.14.54
-  monaco-editor:
+  monaco-editor-core:
     specifier: ^0.38.0
     version: 0.38.0
   monaco-editor-textmate:
@@ -67,9 +49,6 @@ devDependencies:
   volar-service-typescript:
     specifier: 0.0.8
     version: 0.0.8(@volar/language-service@1.7.9)(@volar/typescript@1.7.9)
-  vscode-languageserver-protocol:
-    specifier: ^3.17.3
-    version: 3.17.3
   vue:
     specifier: ^3.3.2
     version: 3.3.2
@@ -905,7 +884,7 @@ packages:
 
   /monaco-editor-core@0.38.0:
     resolution: {integrity: sha512-xMYhffdnz+sKcA9OTxsSh4s1Wul3WocjIKZqX47ULgC5m8Fprwn6CrD+CQG663xQd3pjjoh9xEggy/wN7iqcWA==}
-    dev: false
+    dev: true
 
   /monaco-editor-textmate@4.0.0(monaco-editor@0.38.0)(monaco-textmate@3.0.1):
     resolution: {integrity: sha512-Clwup5LJzVfwURQrS+odSEC5/hZBEG36pQnvBKt4OtBndF8r2xLeXUZcK/AqEBK2u0Npy7frFp9hG7m66Ol9hA==}
@@ -1250,6 +1229,7 @@ packages:
 
   /vscode-uri@3.0.7:
     resolution: {integrity: sha512-eOpPHogvorZRobNqJGhapa0JdwaxpjVvyBp0QIUMRMSf8ZAlqOdEquKuRmw9Qwu0qXtJIWqFtMkmvJjUZmMjVA==}
+    dev: true
 
   /vue-template-compiler@2.7.14:
     resolution: {integrity: sha512-zyA5Y3ArvVG0NacJDkkzJuPQDF8RFeRlzV2vLeSnhSpieO6LK2OVbdLPi5MPPs09Ii+gMO8nY4S3iKQxBxDmWQ==}
