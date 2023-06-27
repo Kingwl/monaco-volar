@@ -6,7 +6,7 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       "path-browserify",
-      "@volar/vue-language-service",
+      "@vue/language-service",
       "monaco-editor-core",
     ],
   },
