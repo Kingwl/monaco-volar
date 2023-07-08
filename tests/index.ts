@@ -1,10 +1,10 @@
 import { setupMonacoEnv, loadOnigasm } from "./env";
 import * as monaco from "monaco-editor-core";
-import { loadGrammars, loadTheme } from "../src/index";
+import { loadGrammars, loadTheme, loadLanguageConfigurations } from "../src/index";
 import { getOrCreateModel } from "../src/utils";
 import data from "./Test.vue?raw";
 
-const afterReady = (theme: string) => {
+const afterReady = async (theme: string) => {
   const model = getOrCreateModel(
     monaco.Uri.parse("file:///demo.vue"),
     "vue",
@@ -47,11 +47,12 @@ const afterReady = (theme: string) => {
     }
   };
 
-  loadGrammars(monaco, editorInstance);
+  await loadGrammars(monaco, editorInstance);
+  await loadLanguageConfigurations(monaco.languages);
 };
 
-Promise.all([setupMonacoEnv(), loadOnigasm(), loadTheme(monaco.editor)]).then(
-  ([, , theme]) => {
+Promise.all([loadTheme(monaco.editor), setupMonacoEnv(), loadOnigasm(),]).then(
+  ([theme]) => {
     afterReady(theme.dark);
   }
 );
