@@ -1,6 +1,10 @@
 import { setupMonacoEnv, loadOnigasm } from "./env";
 import * as monaco from "monaco-editor-core";
-import { loadGrammars, loadTheme, loadLanguageConfigurations } from "../src/index";
+import {
+  loadGrammars,
+  loadTheme,
+  loadLanguageConfigurations,
+} from "../src/index";
 import { getOrCreateModel } from "../src/utils";
 import data from "./Test.vue?raw";
 
@@ -51,7 +55,7 @@ const afterReady = async (theme: string) => {
   await loadLanguageConfigurations(monaco.languages);
 };
 
-Promise.all([loadTheme(monaco.editor), setupMonacoEnv(), loadOnigasm(),]).then(
+Promise.all([loadTheme(monaco.editor), setupMonacoEnv(), loadOnigasm()]).then(
   ([theme]) => {
     afterReady(theme.dark);
   }
