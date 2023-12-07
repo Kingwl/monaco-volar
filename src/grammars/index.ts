@@ -11,24 +11,13 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
     case 'source.ts':
       return {
         format: 'json',
-        content: await import('./TypeScript.tmLanguage.json'),
+        content: await import('./typescript.tmLanguage.json'),
       };
-    // case 'source.tsx':
-    //   return {
-    //     format: 'json',
-    //     content: await import('./TypeScriptReact.tmLanguage.json'),
-    //   };
     case 'source.js':
       return {
         format: 'json',
-        content: await import('./JavaScript.tmLanguage.json'),
+        content: await import('./javascript.tmLanguage.json'),
       };
-    // case 'source.js.jsx':
-    // case 'source.jsx':
-    //   return {
-    //     format: 'json',
-    //     content: await import('./JavaScriptReact.tmLanguage.json'),
-    //   };
     case 'text.html.basic':
       return {
         format: 'json',
@@ -39,16 +28,6 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
         format: 'json',
         content: await import('./css.tmLanguage.json'),
       };
-    // case 'source.stylus':
-    //   return {
-    //     format: 'json',
-    //     content: await import('./stylus.tmLanguage.json'),
-    //   };
-    // case 'source.markdown':
-    //   return {
-    //     format: 'json',
-    //     content: await import('./markdown.tmLanguage.json'),
-    //   };
     default:
       return {
         format: 'json',
