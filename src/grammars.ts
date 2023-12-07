@@ -6,27 +6,27 @@ async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> 
     case 'source.vue':
       return {
         format: 'json',
-        content: await import('./vue.tmLanguage.json'),
+        content: await import('shiki/languages/vue.tmLanguage.json'),
       };
     case 'source.ts':
       return {
         format: 'json',
-        content: await import('./typescript.tmLanguage.json'),
+        content: await import('shiki/languages/typescript.tmLanguage.json'),
       };
     case 'source.js':
       return {
         format: 'json',
-        content: await import('./javascript.tmLanguage.json'),
+        content: await import('shiki/languages/javascript.tmLanguage.json'),
       };
     case 'text.html.basic':
       return {
         format: 'json',
-        content: await import('./html.tmLanguage.json'),
+        content: await import('shiki/languages/html.tmLanguage.json'),
       };
     case 'source.css':
       return {
         format: 'json',
-        content: await import('./css.tmLanguage.json'),
+        content: await import('shiki/languages/css.tmLanguage.json'),
       };
     default:
       return {
