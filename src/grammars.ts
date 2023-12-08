@@ -1,45 +1,50 @@
-import { wireTmGrammars } from 'monaco-editor-textmate';
-import { Registry, type IGrammarDefinition } from 'monaco-textmate';
+import { wireTmGrammars } from "monaco-editor-textmate";
+import { Registry, type IGrammarDefinition } from "monaco-textmate";
 
-async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> {
+async function dispatchGrammars(
+  scopeName: string
+): Promise<IGrammarDefinition> {
   switch (scopeName) {
-    case 'source.vue':
+    case "source.vue":
       return {
-        format: 'json',
-        content: await import('shiki/languages/vue.tmLanguage.json'),
+        format: "json",
+        content: await import("shiki/languages/vue.tmLanguage.json"),
       };
-    case 'source.ts':
+    case "source.ts":
       return {
-        format: 'json',
-        content: await import('shiki/languages/typescript.tmLanguage.json'),
+        format: "json",
+        content: await import("shiki/languages/typescript.tmLanguage.json"),
       };
-    case 'source.js':
+    case "source.js":
       return {
-        format: 'json',
-        content: await import('shiki/languages/javascript.tmLanguage.json'),
+        format: "json",
+        content: await import("shiki/languages/javascript.tmLanguage.json"),
       };
-    case 'text.html.basic':
+    case "text.html.basic":
       return {
-        format: 'json',
-        content: await import('shiki/languages/html.tmLanguage.json'),
+        format: "json",
+        content: await import("shiki/languages/html.tmLanguage.json"),
       };
-    case 'source.css':
+    case "source.css":
       return {
-        format: 'json',
-        content: await import('shiki/languages/css.tmLanguage.json'),
+        format: "json",
+        content: await import("shiki/languages/css.tmLanguage.json"),
       };
     default:
       return {
-        format: 'json',
+        format: "json",
         content: {
-          scopeName: 'source',
+          scopeName: "source",
           patterns: [],
         },
       };
   }
 }
 
-export async function loadGrammars(monaco: typeof import('monaco-editor-core'), editor: import('monaco-editor-core').editor.IStandaloneCodeEditor) {
+export async function loadGrammars(
+  monaco: typeof import("monaco-editor-core"),
+  editor: import("monaco-editor-core").editor.IStandaloneCodeEditor
+) {
   const registry = new Registry({
     getGrammarDefinition: async (scopeName) => {
       const dispatch = await dispatchGrammars(scopeName);
@@ -47,7 +52,7 @@ export async function loadGrammars(monaco: typeof import('monaco-editor-core'), 
     },
   });
   const grammars = new Map();
-  grammars.set('vue', 'source.vue');
+  grammars.set("vue", "source.vue");
   grammars.set("javascript", "source.js");
   grammars.set("typescript", "source.ts");
   grammars.set("css", "source.css");
