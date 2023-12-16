@@ -2,10 +2,16 @@ import * as worker from "monaco-editor-core/esm/vs/editor/editor.worker";
 import type * as monaco from "monaco-editor-core";
 import * as ts from "typescript";
 import { resolveConfig } from "@vue/language-service";
-import { createLanguageService } from "@volar/monaco/worker";
-import createTsService, {
-  createJsDelivrDtsHost,
-} from "volar-service-typescript";
+import {
+  createLanguageHost,
+  createLanguageService,
+  createServiceEnvironment,
+} from "@volar/monaco/worker";
+import {
+  createJsDelivrFs,
+  createJsDelivrUriResolver,
+  decorateServiceEnvironment,
+} from "@volar/cdn";
 
 self.onmessage = () => {
   worker.initialize((ctx: monaco.worker.IWorkerContext) => {
@@ -16,24 +22,19 @@ self.onmessage = () => {
       module: ts.ModuleKind.ESNext,
       moduleResolution: ts.ModuleResolutionKind.NodeJs,
     };
+    const env = createServiceEnvironment();
 
-    return createLanguageService({
-      workerContext: ctx,
-      config: resolveConfig(
-        {
-          services: {
-            typescript: createTsService({ dtsHost: createJsDelivrDtsHost() }),
-          },
-        },
-        compilerOptions as any,
-        undefined,
-        undefined,
-        ts as any
-      ),
-      typescript: {
-        module: ts as any,
-        compilerOptions: compilerOptions as any,
-      },
-    });
+    decorateServiceEnvironment(
+      env,
+      createJsDelivrUriResolver("/node_modules"),
+      createJsDelivrFs()
+    );
+
+    return createLanguageService(
+      { typescript: ts as any },
+      env,
+      resolveConfig({}, compilerOptions, {}, ts as any),
+      createLanguageHost(ctx.getMirrorModels, env, "/", compilerOptions)
+    );
   });
 };

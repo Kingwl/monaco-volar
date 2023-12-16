@@ -12,3 +12,10 @@ export const loadGrammars = async (
   const grammars = await import("./grammars");
   return grammars.loadGrammars(monaco, editor);
 };
+
+export const loadLanguageConfigurations = async (
+  languages: typeof import("monaco-editor-core").languages
+) => {
+  const languageConfigurations = await import("./languageConfigurations");
+  return languageConfigurations.loadLanguageConfigurations(languages);
+};
